@@ -7,7 +7,7 @@ export class Mercader {
    * Constructor de la calse Mercader
    * @param _id - id unico del mercader
    * @param _nombre - Nombre del mercader
-   * @param _tipo - Tipo de oficio del mercader
+   * @param _tipo - Tipo de ofiacio del mercader
    * @param _ubicacion - Lugar donde se encuentra el mercader
    */
   constructor(
@@ -15,7 +15,7 @@ export class Mercader {
     private  _nombre: string,
     private _tipo: string,
     private _ubicacion: string,
-  ) {}
+  ) {} 
 
 
   /**
@@ -48,7 +48,7 @@ export class Mercader {
    * @returns ubciacion del mercader
    */
   get ubicacion(): string {
-    return this.ubicacion;
+    return this._ubicacion;
   }
 
   /**

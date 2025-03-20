@@ -41,7 +41,7 @@ export class Cliente {
    * @returns - raza del cliente
    */
   get raza(): string {
-    return this._nombre;
+    return this._raza;
   }
 
   /**

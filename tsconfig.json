@@ -12,6 +12,6 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noImplicitReturns": true,
-    "outDir": "./dist",
+    "outDir": "./dist"
   }
 }
