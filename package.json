@@ -5,6 +5,7 @@
   "main": "pokemon.js",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
+    "menu": "tsc-watch --onSuccess \"node dist/Funcionamiento.js\"",
     "e1": "tsc-watch --onSuccess \"node dist/ejercicio-1/pokemon.js\"",
     "e2": "tsc-watch --onSuccess \"node dist/ejercicio-2/artista.js\"",
     "doc": "typedoc",
@@ -32,6 +33,7 @@
     "vitest": "^3.0.5"
   },
   "dependencies": {
-    "inquirer": "^12.5.0"
+    "inquirer": "^12.5.0",
+    "lowdb": "^7.0.1"
   }
 }

@@ -1,22 +1,14 @@
+// src/models/Inventario.ts
 import { Bien } from "./bienes.js";
 import { Cliente } from "./cliente.js";
 import { Mercader } from "./mercaderes.js";
-
-interface Transaccion {
-  fecha: Date;
-  tipo: "venta" | "compra" | "devolucion";
-  bien: Bien;
-  cantidad: number;
-  coronas: number;
-  participante: Cliente | Mercader;
-}
 
 export class Inventario {
   private bienes: Bien[] = [];
   private mercaderes: Mercader[] = [];
   private clientes: Cliente[] = [];
-  private transacciones: Transaccion[] = [];
 
+  // Agregar elementos
   agregarBien(bien: Bien) {
     this.bienes.push(bien);
   }
@@ -29,15 +21,20 @@ export class Inventario {
     this.clientes.push(cliente);
   }
 
-  registrarTransaccion(transaccion: Transaccion) {
-    this.transacciones.push(transaccion);
+  // Consultas
+  buscarBien(nombre: string): Bien | undefined {
+    return this.bienes.find(bien => bien.nombre.toLowerCase() === nombre.toLowerCase());
   }
 
-  obtenerStock(): Bien[] {
+  listarBienes(): Bien[] {
     return this.bienes;
   }
 
-  obtenerHistorialTransacciones(): Transaccion[] {
-    return this.transacciones;
+  listarClientes(): Cliente[] {
+    return this.clientes;
+  }
+
+  listarMercaderes(): Mercader[] {
+    return this.mercaderes;
   }
 }
