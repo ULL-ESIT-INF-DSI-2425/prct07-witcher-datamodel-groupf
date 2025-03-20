@@ -1,6 +1,7 @@
 {
   "name": "prct05-objects-classes",
   "version": "1.0.0",
+  "type": "module",
   "main": "pokemon.js",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
