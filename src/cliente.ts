@@ -1,4 +1,4 @@
-
+import { DatabaseManager } from "./dataBase.js";
 
 /**
  * Clase que reprsenta a todas las criaturas que buscan herramientas
@@ -16,7 +16,9 @@ export class Cliente {
     private _nombre: string,
     private _raza: string,
     private _ubicacion: string,
-  ) {}
+  ) {
+    DatabaseManager.guardarDatos('Cliente', this);
+  }
 
   // Getter
 

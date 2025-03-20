@@ -1,4 +1,4 @@
-
+import { DatabaseManager } from "./dataBase.js";
 /**
  * Clase que representa los bien
  */
@@ -19,7 +19,9 @@ export class Bien {
       private _material: string,
       private _peso: number,
       private _valorCoronas: number
-  ) {}
+  ) {
+    DatabaseManager.guardarDatos('Bien', this);
+  }
 
   // Getters
   /**

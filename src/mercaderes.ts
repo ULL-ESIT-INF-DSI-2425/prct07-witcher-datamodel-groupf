@@ -1,4 +1,4 @@
-
+import { DatabaseManager } from "./dataBase.js";
 /**
  * Clase que representa a cada Mercader
  */
@@ -15,7 +15,9 @@ export class Mercader {
     private  _nombre: string,
     private _tipo: string,
     private _ubicacion: string,
-  ) {} 
+  ) {
+    DatabaseManager.guardarDatos('Mercader', this);
+  } 
 
 
   /**
