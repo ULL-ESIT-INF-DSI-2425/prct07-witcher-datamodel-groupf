@@ -22,5 +22,29 @@
     "_material": "a",
     "_peso": 1,
     "_valorCoronas": 1
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "a",
+    "_descripcion": "a",
+    "_material": "a",
+    "_peso": 1,
+    "_valorCoronas": 1
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "1",
+    "_descripcion": "a",
+    "_material": "1",
+    "_peso": 1,
+    "_valorCoronas": 1
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "d",
+    "_descripcion": "d",
+    "_material": "d",
+    "_peso": 5,
+    "_valorCoronas": 5
   }
 ]

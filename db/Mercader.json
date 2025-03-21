@@ -4,5 +4,17 @@
     "_nombre": "b",
     "_tipo": "c",
     "_ubicacion": "d"
+  },
+  {
+    "_id": "a",
+    "_nombre": "a",
+    "_tipo": "a",
+    "_ubicacion": "a"
+  },
+  {
+    "_id": "1",
+    "_nombre": "1",
+    "_tipo": "1",
+    "_ubicacion": "1"
   }
 ]
