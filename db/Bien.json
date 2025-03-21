@@ -14,5 +14,13 @@
     "_material": "fea",
     "_peso": 1,
     "_valorCoronas": 34
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "a",
+    "_descripcion": "a",
+    "_material": "a",
+    "_peso": 1,
+    "_valorCoronas": 1
   }
 ]

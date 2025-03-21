@@ -1,3 +1,4 @@
+// mercaderes.ts
 import { DatabaseManager } from "./dataBase.js";
 /**
  * Clase que representa a cada Mercader

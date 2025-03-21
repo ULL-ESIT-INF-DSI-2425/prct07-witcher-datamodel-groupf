@@ -1,4 +1,4 @@
-// src/models/Inventario.ts
+// Inventario.ts
 import { Bien } from "./bienes.js";
 import { Cliente } from "./cliente.js";
 import { Mercader } from "./mercaderes.js";

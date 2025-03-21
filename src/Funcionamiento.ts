@@ -1,4 +1,4 @@
-// src/index.ts
+//Funcionamiento.ts
 import inquirer from "inquirer";
 import { Inventario } from "./Inventario.js";
 import { Bien } from "./bienes.js";

@@ -1,3 +1,5 @@
+// bienes.ts
+
 import { DatabaseManager } from "./dataBase.js";
 /**
  * Clase que representa los bien
