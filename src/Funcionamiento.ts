@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import fs from "fs/promises";
 import { Inventario } from "./Inventario.js";
 import { Bien } from "./bienes.js";
 import { Cliente } from "./cliente.js";
@@ -413,8 +414,9 @@ async function modificarCliente() {
   }
 }
 
-// Funciones para buscar
 async function buscarBienPorNombre() {
+  await cargarBienesDesdeJSON(); // Cargar bienes desde el archivo JSON
+
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del bien a buscar:" }
   ]);
@@ -428,6 +430,8 @@ async function buscarBienPorNombre() {
 }
 
 async function buscarMercaderPorNombre() {
+  await cargarMercaderesDesdeJSON(); // Cargar mercaderes desde el archivo JSON
+
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del mercader a buscar:" }
   ]);
@@ -441,6 +445,8 @@ async function buscarMercaderPorNombre() {
 }
 
 async function buscarClientePorNombre() {
+  await cargarClientesDesdeJSON(); // Cargar clientes desde el archivo JSON
+
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del cliente a buscar:" }
   ]);
@@ -450,6 +456,51 @@ async function buscarClientePorNombre() {
     console.log("Cliente encontrado:", cliente);
   } else {
     console.log("No se encontró el cliente con el nombre proporcionado.");
+  }
+}
+
+async function cargarBienesDesdeJSON() {
+  try {
+    const data = await fs.readFile("./db/Bien.json", "utf-8"); // Cambiar la ruta al archivo
+    const bienes = JSON.parse(data);
+    bienes.forEach((bien: any) => {
+      inventario.agregarBien(
+        new Bien(bien._idUnico, bien._nombre, bien._descripcion, bien._material, bien._peso, bien._valorCoronas)
+      );
+    });
+    console.log("Bienes cargados desde el archivo JSON.");
+  } catch (error) {
+    console.error("Error al cargar los bienes desde el archivo JSON:", error.message);
+  }
+}
+
+async function cargarMercaderesDesdeJSON() {
+  try {
+    const data = await fs.readFile("./db/Mercader.json", "utf-8");
+    const mercaderes = JSON.parse(data);
+    mercaderes.forEach((mercader: any) => {
+      inventario.agregarMercader(
+        new Mercader(mercader._id, mercader._nombre, mercader._tipo, mercader._ubicacion)
+      );
+    });
+    console.log("Mercaderes cargados desde el archivo JSON.");
+  } catch (error) {
+    console.error("Error al cargar los mercaderes desde el archivo JSON:", error.message);
+  }
+}
+
+async function cargarClientesDesdeJSON() {
+  try {
+    const data = await fs.readFile("./db/Cliente.json", "utf-8");
+    const clientes = JSON.parse(data);
+    clientes.forEach((cliente: any) => {
+      inventario.agregarCliente(
+        new Cliente(cliente._idUnico, cliente._nombre, cliente._raza, cliente._ubicacion)
+      );
+    });
+    console.log("Clientes cargados desde el archivo JSON.");
+  } catch (error) {
+    console.error("Error al cargar los clientes desde el archivo JSON:", error.message);
   }
 }
 
