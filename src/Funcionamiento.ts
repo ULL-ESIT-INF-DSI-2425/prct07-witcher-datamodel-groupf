@@ -297,7 +297,11 @@ async function menuInformes() {
 /**
  * Funcion para agregar un bien
  */
+/**
+ * Funcion para agregar un bien
+ */
 async function agregarBien() {
+  // Solicitar datos del nuevo bien
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del bien:" },
     { type: "input", name: "nombre", message: "Nombre del bien:" },
@@ -307,8 +311,21 @@ async function agregarBien() {
     { type: "number", name: "valor", message: "Valor del bien en coronas:" }
   ]);
 
+  // Cargar los bienes actuales desde el archivo JSON
+  await cargarBienesDesdeJSON();
+
+  // Comprobar si el ID ya existe en el inventario
+  const existe = inventario.listarBienes().some(bien => bien.idUnico === respuestas.id.trim());
+  console.log("¿El ID ya existe?:", existe);
+
+  if (existe) {
+    console.log("Ya existe un bien con el mismo ID. No se puede agregar.");
+    return;
+  }
+
+  // Crear el nuevo bien
   const nuevoBien = new Bien(
-    respuestas.id,
+    respuestas.id.trim(),
     respuestas.nombre,
     respuestas.descripcion,
     respuestas.material,
@@ -316,9 +333,18 @@ async function agregarBien() {
     respuestas.valor
   );
 
+  // Agregar el nuevo bien al inventario
   inventario.agregarBien(nuevoBien);
   console.log("Bien añadido con éxito.");
-  await guardarBienesEnJSON(); // Guardar los cambios en el archivo JSON
+
+  // Guardar los cambios en el archivo JSON
+  try {
+    const bienesActualizados = inventario.listarBienes();
+    await fs.writeFile("./db/Bien.json", JSON.stringify(bienesActualizados, null, 2), "utf-8");
+    console.log("Base de datos actualizada.");
+  } catch (error) {
+    console.error("Error al actualizar la base de datos:", error.message);
+  }
 }
 
 /**
@@ -332,16 +358,31 @@ async function agregarMercader() {
     { type: "input", name: "ubicacion", message: "Ubicación:" }
   ]);
 
-  const nuevoMercader = new Mercader(
-    respuestas.id,
-    respuestas.nombre,
-    respuestas.tipo,
-    respuestas.ubicacion
-  );
+  try {
+    const data = await fs.readFile("./db/Mercader.json", "utf-8");
+    const mercaderes: any[] = JSON.parse(data);
 
-  inventario.agregarMercader(nuevoMercader);
-  console.log("Mercader añadido con éxito.");
+    const existe = mercaderes.some(mercader => mercader._id === respuestas.id);
+    if (existe) {
+      console.log("Ya existe un mercader con el mismo ID. No se puede agregar.");
+      return;
+    }
+
+    const nuevoMercader = new Mercader(
+      respuestas.id,
+      respuestas.nombre,
+      respuestas.tipo,
+      respuestas.ubicacion
+    );
+
+    mercaderes.push(nuevoMercader);
+    await fs.writeFile("./db/Mercader.json", JSON.stringify(mercaderes, null, 2), "utf-8");
+    console.log("Mercader agregado con éxito.");
+  } catch (error) {
+    console.error("Error al agregar el mercader:", error.message);
+  }
 }
+
 
 /**
  * Funcion para agregar un cliente
@@ -376,7 +417,7 @@ async function eliminarBien() {
 
   if (inventario.eliminarBien(respuestas.id)) {
     console.log("Bien eliminado con éxito.");
-    await guardarBienesEnJSON(); // Guardar los cambios en el archivo JSON
+    await fs.writeFile("./db/Bien.json", JSON.stringify(inventario.listarBienes(), null, 2), "utf-8");
   } else {
     console.log("No se encontró el bien con el ID proporcionado.");
   }
@@ -433,7 +474,6 @@ async function modificarBien() {
     valorCoronas: respuestas.valor
   })) {
     console.log("Bien modificado con éxito.");
-    await guardarBienesEnJSON(); // Guardar los cambios en el archivo JSON
   } else {
     console.log("No se encontró el bien con el ID proporcionado.");
   }
@@ -507,25 +547,34 @@ async function modificarCliente() {
  * Funcion para buscar un bien por nombre
  */
 async function buscarBienPorNombre() {
-  await cargarBienesDesdeJSON(); // Cargar bienes desde el archivo JSON
-
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del bien a buscar:" }
   ]);
 
-  const bien = inventario.buscarBien(respuestas.nombre);
-  if (bien) {
-    console.log("Bien encontrado:", bien);
-  } else {
-    console.log("No se encontró el bien con el nombre proporcionado.");
+  try {
+    // Leer el archivo JSON
+    const data = await fs.readFile("./db/Bien.json", "utf-8");
+    const bienes: Bien[] = JSON.parse(data);
+
+    // Buscar el bien por nombre con validación
+    const bien = bienes.find(bien => bien.nombre && bien.nombre.toLowerCase() === respuestas.nombre.toLowerCase());
+
+    if (bien) {
+      console.log("Bien encontrado:", bien);
+    } else {
+      console.log("No se encontró el bien con el nombre proporcionado.");
+    }
+  } catch (error) {
+    console.error("Error al leer el archivo JSON:", error.message);
   }
 }
+
 
 /**
  * Funcion para buscar un mercader por nombre
  */
 async function buscarMercaderPorNombre() {
-  await cargarMercaderesDesdeJSON(); // Cargar mercaderes desde el archivo JSON
+ 
 
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del mercader a buscar:" }
@@ -543,8 +592,7 @@ async function buscarMercaderPorNombre() {
  * Funcion para buscar un cliente por nombre
  */
 async function buscarClientePorNombre() {
-  await cargarClientesDesdeJSON(); // Cargar clientes desde el archivo JSON
-
+ 
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del cliente a buscar:" }
   ]);
@@ -562,14 +610,18 @@ async function buscarClientePorNombre() {
  */
 async function cargarBienesDesdeJSON() {
   try {
-    const data = await fs.readFile("./db/Bien.json", "utf-8"); // Cambiar la ruta al archivo
+    const data = await fs.readFile("./db/Bien.json", "utf-8");
     const bienes = JSON.parse(data);
+
+    // Limpiar el inventario antes de cargar nuevos bienes
+    inventario.limpiarBienes();
+
+    // Agregar los bienes al inventario
     bienes.forEach((bien: any) => {
-      inventario.agregarBien(
-        new Bien(bien._idUnico, bien._nombre, bien._descripcion, bien._material, bien._peso, bien._valorCoronas)
-      );
+      inventario.agregarBien(bien);
     });
-    console.log("Bienes cargados desde el archivo JSON.");
+
+    console.log("Bienes cargados desde el archivo JSON:", inventario.listarBienes());
   } catch (error) {
     console.error("Error al cargar los bienes desde el archivo JSON:", error.message);
   }
@@ -683,32 +735,7 @@ async function historialTransacciones() {
   }
 }
 
-async function guardarBienesEnJSON(): Promise<void> {
-  try {
-    await fs.writeFile("./db/Bien.json", JSON.stringify(inventario.listarBienes(), null, 2), "utf-8");
-    console.log("Bienes guardados correctamente.");
-  } catch (error) {
-    console.error("Error al guardar los bienes:", error.message);
-  }
-}
 
-async function guardarMercaderesEnJSON(): Promise<void> {
-  try {
-    await fs.writeFile("./db/Mercader.json", JSON.stringify(inventario.listarMercaderes(), null, 2), "utf-8");
-    console.log("Mercaderes guardados correctamente.");
-  } catch (error) {
-    console.error("Error al guardar los mercaderes:", error.message);
-  }
-}
-
-async function guardarClientesEnJSON(): Promise<void> {
-  try {
-    await fs.writeFile("./db/Cliente.json", JSON.stringify(inventario.listarClientes(), null, 2), "utf-8");
-    console.log("Clientes guardados correctamente.");
-  } catch (error) {
-    console.error("Error al guardar los clientes:", error.message);
-  }
-}
 
 
 menuPrincipal();

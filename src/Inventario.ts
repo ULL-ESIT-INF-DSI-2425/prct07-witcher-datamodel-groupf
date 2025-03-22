@@ -18,6 +18,15 @@ export class Inventario {
     return this.gestorTransacciones;
   }
   
+  limpiarBienes() {
+    this.bienes = [];
+  }
+
+
+  buscarBienPorId(id: string): Bien | undefined {
+    return this.bienes.find(bien => bien.idUnico === id);
+  }
+
   /**
    * Constructor de la clase Inventario
    */
@@ -55,12 +64,23 @@ export class Inventario {
    * @returns true si se eliminó el bien, false en caso contrario
    */
   eliminarBien(id: string): boolean {
-    const index = this.bienes.findIndex(bien => bien.idUnico === id);
-    if (index !== -1) {
-      this.bienes.splice(index, 1);
+    console.log("Buscando bien...");
+    console.log("ID proporcionado: ", id);
+    console.log("Bienes actuales en el inventario: ", this.bienes);
+  
+    // Buscar el índice del bien utilizando el campo correcto (_idUnico)
+    const indice = this.bienes.findIndex(bien => bien.idUnico === id);
+    console.log("Índice encontrado: ", indice);
+  
+    if (indice !== -1) {
+      console.log("Eliminando bien...");
+      this.bienes.splice(indice, 1); // Eliminar el bien del arreglo
+      console.log("Bien eliminado. Inventario actualizado: ", this.bienes);
       return true;
     }
-    return false;
+  
+    console.log("No se encontró el bien con el ID proporcionado.");
+    return false; // No se encontró el bien con el ID proporcionado
   }
 
   /**

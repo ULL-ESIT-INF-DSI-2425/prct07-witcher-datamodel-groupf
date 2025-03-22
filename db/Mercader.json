@@ -1,72 +1,18 @@
 [
   {
-    "_id": "a",
-    "_nombre": "b",
-    "_tipo": "c",
-    "_ubicacion": "d"
-  },
-  {
-    "_id": "a",
-    "_nombre": "a",
-    "_tipo": "a",
-    "_ubicacion": "a"
-  },
-  {
     "_id": "1",
-    "_nombre": "1",
-    "_tipo": "1",
-    "_ubicacion": "1"
-  },
-  {
-    "_id": "pepe",
-    "_nombre": "rodrigez",
-    "_tipo": "animal",
-    "_ubicacion": "chafiras",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
-  },
-  {
-    "_id": "a",
-    "_nombre": "b",
-    "_tipo": "c",
-    "_ubicacion": "d",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
-  },
-  {
-    "_id": "a",
-    "_nombre": "a",
-    "_tipo": "a",
-    "_ubicacion": "a",
+    "_nombre": "w",
+    "_tipo": "3",
+    "_ubicacion": "2",
     "gestorTransacciones": {
       "transacciones": []
     }
   },
   {
     "_id": "1",
-    "_nombre": "1",
-    "_tipo": "1",
-    "_ubicacion": "1",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
-  },
-  {
-    "_id": "pepe",
-    "_nombre": "rodrigez",
-    "_tipo": "animal",
-    "_ubicacion": "chafiras",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
-  },
-  {
-    "_id": "pepe",
-    "_nombre": "ayoze",
-    "_tipo": "pez",
-    "_ubicacion": "londres",
+    "_nombre": "3",
+    "_tipo": "43",
+    "_ubicacion": "2",
     "gestorTransacciones": {
       "transacciones": []
     }
