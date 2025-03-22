@@ -18,12 +18,9 @@
     }
   },
   {
-    "_idUnico": "2",
-    "_nombre": "3",
-    "_raza": "4",
-    "_ubicacion": "3",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
+    "_idUnico": "5",
+    "_nombre": "1",
+    "_raza": "1",
+    "_ubicacion": "1"
   }
 ]

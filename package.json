@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
     "menu": "tsc-watch --onSuccess \"node dist/Funcionamiento.js\"",
-    "e1": "tsc-watch --onSuccess \"node dist/ejercicio-1/pokemon.js\"",
-    "e2": "tsc-watch --onSuccess \"node dist/ejercicio-2/artista.js\"",
     "doc": "typedoc",
     "test": "vitest run",
     "coverage": "vitest run --coverage --coverage.include src/"

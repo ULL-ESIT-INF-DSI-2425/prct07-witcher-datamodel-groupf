@@ -527,18 +527,43 @@ async function modificarBien() {
     { type: "number", name: "valor", message: "Nuevo valor del bien en coronas:" }
   ]);
 
-  if (inventario.modificarBien(respuestas.id, {
-    nombre: respuestas.nombre,
-    descripcion: respuestas.descripcion,
-    material: respuestas.material,
-    peso: respuestas.peso,
-    valorCoronas: respuestas.valor
-  })) {
+  try {
+    // Leer el archivo JSON de bienes
+    const data = await fs.readFile("./db/Bien.json", "utf-8");
+    let bienes: any[] = JSON.parse(data);
+
+    // Buscar el índice del bien a modificar
+    const indice = bienes.findIndex(bien => bien._idUnico === respuestas.id.trim());
+
+    if (indice === -1) {
+      console.log("No se encontró el bien con el ID proporcionado.");
+      return;
+    }
+
+    // Eliminar el bien existente
+    bienes.splice(indice, 1);
+
+    // Crear el nuevo bien con los datos proporcionados
+    const nuevoBien = {
+      _idUnico: respuestas.id.trim(),
+      _nombre: respuestas.nombre,
+      _descripcion: respuestas.descripcion,
+      _material: respuestas.material,
+      _peso: respuestas.peso,
+      _valorCoronas: respuestas.valor
+    };
+
+    // Agregar el nuevo bien al arreglo
+    bienes.push(nuevoBien);
+
+    // Guardar los cambios en el archivo JSON
+    await fs.writeFile("./db/Bien.json", JSON.stringify(bienes, null, 2), "utf-8");
     console.log("Bien modificado con éxito.");
-  } else {
-    console.log("No se encontró el bien con el ID proporcionado.");
+  } catch (error) {
+    console.error("Error al modificar el bien:", error.message);
   }
 }
+
 
 /**
  * Funcion para modificar un mercader
@@ -551,36 +576,41 @@ async function modificarMercader() {
     { type: "input", name: "ubicacion", message: "Nueva ubicación del mercader:" }
   ]);
 
-  if (inventario.modificarMercader(respuestas.id, {
-    nombre: respuestas.nombre,
-    tipo: respuestas.tipo,
-    ubicacion: respuestas.ubicacion
-  })) {
+  try {
+    // Leer el archivo JSON de mercaderes
+    const data = await fs.readFile("./db/Mercader.json", "utf-8");
+    let mercaderes: any[] = JSON.parse(data);
+
+    // Buscar el índice del mercader a modificar
+    const indice = mercaderes.findIndex(mercader => mercader._id === respuestas.id.trim());
+
+    if (indice === -1) {
+      console.log("No se encontró el mercader con el ID proporcionado.");
+      return;
+    }
+
+    // Eliminar el mercader existente
+    mercaderes.splice(indice, 1);
+
+    // Crear el nuevo mercader con los datos proporcionados
+    const nuevoMercader = {
+      _id: respuestas.id.trim(),
+      _nombre: respuestas.nombre,
+      _tipo: respuestas.tipo,
+      _ubicacion: respuestas.ubicacion
+    };
+
+    // Agregar el nuevo mercader al arreglo
+    mercaderes.push(nuevoMercader);
+
+    // Guardar los cambios en el archivo JSON
+    await fs.writeFile("./db/Mercader.json", JSON.stringify(mercaderes, null, 2), "utf-8");
     console.log("Mercader modificado con éxito.");
-  } else {
-    console.log("No se encontró el mercader con el ID proporcionado.");
+  } catch (error) {
+    console.error("Error al modificar el mercader:", error.message);
   }
 }
 
-/**
- * Función para registrar una venta
- */
-async function registrarVenta() {
-  const respuestas = await inquirer.prompt([
-    { type: "input", name: "clienteId", message: "ID del cliente:" },
-    { type: "input", name: "bienes", message: "Bienes vendidos (separados por comas):" },
-    { type: "number", name: "cantidadCoronas", message: "Cantidad de coronas involucrada:" },
-    { type: "input", name: "detalles", message: "Detalles adicionales:" }
-  ]);
-
-  const bienes = respuestas.bienes.split(",").map((bien: string) => bien.trim());
-  const exito = inventario.registrarVenta(respuestas.clienteId, bienes, respuestas.cantidadCoronas, respuestas.detalles);
-  if (exito) {
-    console.log("Venta registrada con éxito.");
-  } else {
-    console.log("No se pudo registrar la venta. Verifica los datos ingresados.");
-  }
-}
 
 /**
  * Funcion para modificar un cliente
@@ -593,14 +623,38 @@ async function modificarCliente() {
     { type: "input", name: "ubicacion", message: "Nueva ubicación del cliente:" }
   ]);
 
-  if (inventario.modificarCliente(respuestas.id, {
-    nombre: respuestas.nombre,
-    raza: respuestas.raza,
-    ubicacion: respuestas.ubicacion
-  })) {
+  try {
+    // Leer el archivo JSON de clientes
+    const data = await fs.readFile("./db/Cliente.json", "utf-8");
+    let clientes: any[] = JSON.parse(data);
+
+    // Buscar el índice del cliente a modificar
+    const indice = clientes.findIndex(cliente => cliente._idUnico === respuestas.id.trim());
+
+    if (indice === -1) {
+      console.log("No se encontró el cliente con el ID proporcionado.");
+      return;
+    }
+
+    // Eliminar el cliente existente
+    clientes.splice(indice, 1);
+
+    // Crear el nuevo cliente con los datos proporcionados
+    const nuevoCliente = {
+      _idUnico: respuestas.id.trim(),
+      _nombre: respuestas.nombre,
+      _raza: respuestas.raza,
+      _ubicacion: respuestas.ubicacion
+    };
+
+    // Agregar el nuevo cliente al arreglo
+    clientes.push(nuevoCliente);
+
+    // Guardar los cambios en el archivo JSON
+    await fs.writeFile("./db/Cliente.json", JSON.stringify(clientes, null, 2), "utf-8");
     console.log("Cliente modificado con éxito.");
-  } else {
-    console.log("No se encontró el cliente con el ID proporcionado.");
+  } catch (error) {
+    console.error("Error al modificar el cliente:", error.message);
   }
 }
 
@@ -617,19 +671,23 @@ async function buscarBienPorNombre() {
     const data = await fs.readFile("./db/Bien.json", "utf-8");
     const bienes: Bien[] = JSON.parse(data);
 
-    // Buscar el bien por nombre con validación
-    const bien = bienes.find(bien => bien.nombre && bien.nombre.toLowerCase() === respuestas.nombre.toLowerCase());
+    // Buscar todos los bienes que coincidan con el nombre
+    const bienesEncontrados = bienes.filter(bien => 
+      bien.nombre && bien.nombre.toLowerCase().includes(respuestas.nombre.toLowerCase())
+    );
 
-    if (bien) {
-      console.log("Bien encontrado:", bien);
+    if (bienesEncontrados.length > 0) {
+      console.log("Bien(es) encontrado(s):");
+      bienesEncontrados.forEach((bien, index) => {
+        console.log(`${index + 1}.`, bien);
+      });
     } else {
-      console.log("No se encontró el bien con el nombre proporcionado.");
+      console.log("No se encontró ningún bien con el nombre proporcionado.");
     }
   } catch (error) {
     console.error("Error al leer el archivo JSON:", error.message);
   }
 }
-
 
 /**
  * Funcion para buscar un mercader por nombre

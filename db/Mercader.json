@@ -1,8 +1,8 @@
 [
   {
     "_id": "1",
-    "_nombre": "w",
-    "_tipo": "3",
+    "_nombre": "3",
+    "_tipo": "43",
     "_ubicacion": "2",
     "gestorTransacciones": {
       "transacciones": []
@@ -10,11 +10,8 @@
   },
   {
     "_id": "1",
-    "_nombre": "3",
-    "_tipo": "43",
-    "_ubicacion": "2",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
+    "_nombre": "6",
+    "_tipo": "6",
+    "_ubicacion": "6"
   }
 ]
