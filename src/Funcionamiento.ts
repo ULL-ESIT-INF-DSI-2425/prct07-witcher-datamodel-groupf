@@ -253,7 +253,9 @@ async function menuOrdenar() {
   await menuOrdenar();
 }
 
-// Funciones para agregar
+/**
+ * Funcion para agregar un bien
+ */
 async function agregarBien() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del bien:" },
@@ -277,6 +279,9 @@ async function agregarBien() {
   console.log("Bien añadido con éxito.");
 }
 
+/**
+ * Funcion para agregar un mercader
+ */
 async function agregarMercader() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del mercader:" },
@@ -296,6 +301,9 @@ async function agregarMercader() {
   console.log("Mercader añadido con éxito.");
 }
 
+/**
+ * Funcion para agregar un cliente
+ */
 async function agregarCliente() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del cliente:" },
@@ -315,7 +323,10 @@ async function agregarCliente() {
   console.log("Cliente añadido con éxito.");
 }
 
-// Funciones para eliminar
+
+/**
+ * Funcion para eliminar un bien
+ */
 async function eliminarBien() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del bien a eliminar:" }
@@ -328,6 +339,9 @@ async function eliminarBien() {
   }
 }
 
+/**
+ * Funcion para eliminar un mercader
+ */
 async function eliminarMercader() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del mercader a eliminar:" }
@@ -340,6 +354,9 @@ async function eliminarMercader() {
   }
 }
 
+/**
+ * Funcion para eliminar un cliente
+ */
 async function eliminarCliente() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del cliente a eliminar:" }
@@ -352,7 +369,9 @@ async function eliminarCliente() {
   }
 }
 
-// Funciones para modificar
+/**
+ * Funcion para modificar un bien
+ */
 async function modificarBien() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del bien a modificar:" },
@@ -376,6 +395,9 @@ async function modificarBien() {
   }
 }
 
+/**
+ * Funcion para modificar un mercader
+ */
 async function modificarMercader() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del mercader a modificar:" },
@@ -395,6 +417,9 @@ async function modificarMercader() {
   }
 }
 
+/**
+ * Funcion para modificar un cliente
+ */
 async function modificarCliente() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del cliente a modificar:" },
@@ -414,6 +439,9 @@ async function modificarCliente() {
   }
 }
 
+/**
+ * Funcion para buscar un bien por nombre
+ */
 async function buscarBienPorNombre() {
   await cargarBienesDesdeJSON(); // Cargar bienes desde el archivo JSON
 
@@ -429,6 +457,9 @@ async function buscarBienPorNombre() {
   }
 }
 
+/**
+ * Funcion para buscar un mercader por nombre
+ */
 async function buscarMercaderPorNombre() {
   await cargarMercaderesDesdeJSON(); // Cargar mercaderes desde el archivo JSON
 
@@ -444,6 +475,9 @@ async function buscarMercaderPorNombre() {
   }
 }
 
+/**
+ * Funcion para buscar un cliente por nombre
+ */
 async function buscarClientePorNombre() {
   await cargarClientesDesdeJSON(); // Cargar clientes desde el archivo JSON
 
@@ -459,6 +493,9 @@ async function buscarClientePorNombre() {
   }
 }
 
+/**
+ * Funcion para cargar los bienes desde un archivo JSON
+ */
 async function cargarBienesDesdeJSON() {
   try {
     const data = await fs.readFile("./db/Bien.json", "utf-8"); // Cambiar la ruta al archivo
@@ -474,6 +511,9 @@ async function cargarBienesDesdeJSON() {
   }
 }
 
+/**
+ * Funcion para cargar los mercaderes desde un archivo JSON
+ */
 async function cargarMercaderesDesdeJSON() {
   try {
     const data = await fs.readFile("./db/Mercader.json", "utf-8");
@@ -489,6 +529,9 @@ async function cargarMercaderesDesdeJSON() {
   }
 }
 
+/**
+ * Funcion para cargar los clientes desde un archivo JSON
+ */
 async function cargarClientesDesdeJSON() {
   try {
     const data = await fs.readFile("./db/Cliente.json", "utf-8");

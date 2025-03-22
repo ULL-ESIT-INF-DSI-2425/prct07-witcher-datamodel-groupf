@@ -3,18 +3,21 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+/**
+ * Clase que se encarga de la gestión de la base de datos.
+ */
 export class DatabaseManager {
   private static dbPath = path.join(path.dirname(new URL(import.meta.url).pathname), '../db');
 
   static guardarDatos(tipo: string, datos: any) {
     const filePath = path.join(this.dbPath, `${tipo}.json`);
 
-    // Asegúrate de que el directorio existe antes de intentar guardar el archivo
+    // Nos aseguramos de que la carpeta db exista antes de guardar los datos
     if (!fs.existsSync(this.dbPath)) {
       fs.mkdirSync(this.dbPath, { recursive: true });
     }
 
-    // Verificar si el archivo existe y si no, crear el archivo vacío
+    // Verificamos si el archivo existe y si no, creamos el archivo vacío
     if (!fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, JSON.stringify([])); // Crea un archivo vacío si no existe
     }

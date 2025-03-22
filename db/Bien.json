@@ -110,5 +110,117 @@
     "_material": "hierro",
     "_peso": 23,
     "_valorCoronas": 1000
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "b",
+    "_descripcion": "c",
+    "_material": "d",
+    "_peso": 1,
+    "_valorCoronas": 2
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "b",
+    "_descripcion": "c",
+    "_material": "fea",
+    "_peso": 1,
+    "_valorCoronas": 34
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "a",
+    "_descripcion": "a",
+    "_material": "a",
+    "_peso": 1,
+    "_valorCoronas": 1
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "a",
+    "_descripcion": "a",
+    "_material": "a",
+    "_peso": 1,
+    "_valorCoronas": 1
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "1",
+    "_descripcion": "a",
+    "_material": "1",
+    "_peso": 1,
+    "_valorCoronas": 1
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "d",
+    "_descripcion": "d",
+    "_material": "d",
+    "_peso": 5,
+    "_valorCoronas": 5
+  },
+  {
+    "_idUnico": "espada",
+    "_nombre": "espada_2",
+    "_descripcion": "hace pupa",
+    "_material": "hierro",
+    "_peso": 23,
+    "_valorCoronas": 1000
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "b",
+    "_descripcion": "c",
+    "_material": "d",
+    "_peso": 1,
+    "_valorCoronas": 2
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "b",
+    "_descripcion": "c",
+    "_material": "fea",
+    "_peso": 1,
+    "_valorCoronas": 34
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "a",
+    "_descripcion": "a",
+    "_material": "a",
+    "_peso": 1,
+    "_valorCoronas": 1
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "a",
+    "_descripcion": "a",
+    "_material": "a",
+    "_peso": 1,
+    "_valorCoronas": 1
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "1",
+    "_descripcion": "a",
+    "_material": "1",
+    "_peso": 1,
+    "_valorCoronas": 1
+  },
+  {
+    "_idUnico": "a",
+    "_nombre": "d",
+    "_descripcion": "d",
+    "_material": "d",
+    "_peso": 5,
+    "_valorCoronas": 5
+  },
+  {
+    "_idUnico": "espada",
+    "_nombre": "espada_2",
+    "_descripcion": "hace pupa",
+    "_material": "hierro",
+    "_peso": 23,
+    "_valorCoronas": 1000
   }
 ]
