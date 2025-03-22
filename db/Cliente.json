@@ -2,15 +2,6 @@
   {
     "_idUnico": "2",
     "_nombre": "3",
-    "_raza": "21",
-    "_ubicacion": "34",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
-  },
-  {
-    "_idUnico": "2",
-    "_nombre": "3",
     "_raza": "32",
     "_ubicacion": "34",
     "gestorTransacciones": {

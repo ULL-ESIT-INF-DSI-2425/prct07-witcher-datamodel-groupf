@@ -426,11 +426,27 @@ async function eliminarBien() {
     { type: "input", name: "id", message: "ID del bien a eliminar:" }
   ]);
 
-  if (inventario.eliminarBien(respuestas.id)) {
+  try {
+    // Leer el archivo JSON de bienes
+    const data = await fs.readFile("./db/Bien.json", "utf-8");
+    let bienes: any[] = JSON.parse(data);
+
+    // Buscar el índice del bien a eliminar
+    const indice = bienes.findIndex(bien => bien._idUnico === respuestas.id.trim());
+
+    if (indice === -1) {
+      console.log("No se encontró el bien con el ID proporcionado.");
+      return;
+    }
+
+    // Eliminar el bien del arreglo
+    bienes.splice(indice, 1);
+
+    // Guardar los cambios en el archivo JSON
+    await fs.writeFile("./db/Bien.json", JSON.stringify(bienes, null, 2), "utf-8");
     console.log("Bien eliminado con éxito.");
-    await fs.writeFile("./db/Bien.json", JSON.stringify(inventario.listarBienes(), null, 2), "utf-8");
-  } else {
-    console.log("No se encontró el bien con el ID proporcionado.");
+  } catch (error) {
+    console.error("Error al eliminar el bien:", error.message);
   }
 }
 
@@ -442,10 +458,27 @@ async function eliminarMercader() {
     { type: "input", name: "id", message: "ID del mercader a eliminar:" }
   ]);
 
-  if (inventario.eliminarMercader(respuestas.id)) {
+  try {
+    // Leer el archivo JSON de mercaderes
+    const data = await fs.readFile("./db/Mercader.json", "utf-8");
+    let mercaderes: any[] = JSON.parse(data);
+
+    // Buscar el índice del mercader a eliminar
+    const indice = mercaderes.findIndex(mercader => mercader._id === respuestas.id.trim());
+
+    if (indice === -1) {
+      console.log("No se encontró el mercader con el ID proporcionado.");
+      return;
+    }
+
+    // Eliminar el mercader del arreglo
+    mercaderes.splice(indice, 1);
+
+    // Guardar los cambios en el archivo JSON
+    await fs.writeFile("./db/Mercader.json", JSON.stringify(mercaderes, null, 2), "utf-8");
     console.log("Mercader eliminado con éxito.");
-  } else {
-    console.log("No se encontró el mercader con el ID proporcionado.");
+  } catch (error) {
+    console.error("Error al eliminar el mercader:", error.message);
   }
 }
 
@@ -457,10 +490,27 @@ async function eliminarCliente() {
     { type: "input", name: "id", message: "ID del cliente a eliminar:" }
   ]);
 
-  if (inventario.eliminarCliente(respuestas.id)) {
+  try {
+    // Leer el archivo JSON de clientes
+    const data = await fs.readFile("./db/Cliente.json", "utf-8");
+    let clientes: any[] = JSON.parse(data);
+
+    // Buscar el índice del cliente a eliminar
+    const indice = clientes.findIndex(cliente => cliente._idUnico === respuestas.id.trim());
+
+    if (indice === -1) {
+      console.log("No se encontró el cliente con el ID proporcionado.");
+      return;
+    }
+
+    // Eliminar el cliente del arreglo
+    clientes.splice(indice, 1);
+
+    // Guardar los cambios en el archivo JSON
+    await fs.writeFile("./db/Cliente.json", JSON.stringify(clientes, null, 2), "utf-8");
     console.log("Cliente eliminado con éxito.");
-  } else {
-    console.log("No se encontró el cliente con el ID proporcionado.");
+  } catch (error) {
+    console.error("Error al eliminar el cliente:", error.message);
   }
 }
 
