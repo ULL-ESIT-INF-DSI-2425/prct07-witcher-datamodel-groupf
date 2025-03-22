@@ -297,11 +297,7 @@ async function menuInformes() {
 /**
  * Funcion para agregar un bien
  */
-/**
- * Funcion para agregar un bien
- */
 async function agregarBien() {
-  // Solicitar datos del nuevo bien
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del bien:" },
     { type: "input", name: "nombre", message: "Nombre del bien:" },
@@ -311,39 +307,36 @@ async function agregarBien() {
     { type: "number", name: "valor", message: "Valor del bien en coronas:" }
   ]);
 
-  // Cargar los bienes actuales desde el archivo JSON
-  await cargarBienesDesdeJSON();
-
-  // Comprobar si el ID ya existe en el inventario
-  const existe = inventario.listarBienes().some(bien => bien.idUnico === respuestas.id.trim());
-  console.log("¿El ID ya existe?:", existe);
-
-  if (existe) {
-    console.log("Ya existe un bien con el mismo ID. No se puede agregar.");
-    return;
-  }
-
-  // Crear el nuevo bien
-  const nuevoBien = new Bien(
-    respuestas.id.trim(),
-    respuestas.nombre,
-    respuestas.descripcion,
-    respuestas.material,
-    respuestas.peso,
-    respuestas.valor
-  );
-
-  // Agregar el nuevo bien al inventario
-  inventario.agregarBien(nuevoBien);
-  console.log("Bien añadido con éxito.");
-
-  // Guardar los cambios en el archivo JSON
   try {
-    const bienesActualizados = inventario.listarBienes();
-    await fs.writeFile("./db/Bien.json", JSON.stringify(bienesActualizados, null, 2), "utf-8");
-    console.log("Base de datos actualizada.");
+    // Leer el archivo JSON de bienes
+    const data = await fs.readFile("./db/Bien.json", "utf-8");
+    const bienes: any[] = JSON.parse(data);
+
+    // Verificar si el ID ya existe
+    const existe = bienes.some(bien => bien._idUnico === respuestas.id.trim());
+    if (existe) {
+      console.log("Ya existe un bien con el mismo ID. No se puede agregar.");
+      return;
+    }
+
+    // Crear el nuevo bien
+    const nuevoBien = new Bien(
+      respuestas.id.trim(),
+      respuestas.nombre,
+      respuestas.descripcion,
+      respuestas.material,
+      respuestas.peso,
+      respuestas.valor
+    );
+
+    // Agregar el nuevo bien al arreglo
+    bienes.push(nuevoBien);
+
+    // Guardar los cambios en el archivo JSON
+    await fs.writeFile("./db/Bien.json", JSON.stringify(bienes, null, 2), "utf-8");
+    console.log("Bien agregado con éxito.");
   } catch (error) {
-    console.error("Error al actualizar la base de datos:", error.message);
+    console.error("Error al agregar el bien:", error.message);
   }
 }
 
@@ -383,7 +376,6 @@ async function agregarMercader() {
   }
 }
 
-
 /**
  * Funcion para agregar un cliente
  */
@@ -395,17 +387,36 @@ async function agregarCliente() {
     { type: "input", name: "ubicacion", message: "Ubicación:" }
   ]);
 
-  const nuevoCliente = new Cliente(
-    respuestas.id,
-    respuestas.nombre,
-    respuestas.raza,
-    respuestas.ubicacion
-  );
+  try {
+    // Leer el archivo JSON de clientes
+    const data = await fs.readFile("./db/Cliente.json", "utf-8");
+    const clientes: any[] = JSON.parse(data);
 
-  inventario.agregarCliente(nuevoCliente);
-  console.log("Cliente añadido con éxito.");
+    // Verificar si el ID ya existe
+    const existe = clientes.some(cliente => cliente._idUnico === respuestas.id.trim());
+    if (existe) {
+      console.log("Ya existe un cliente con el mismo ID. No se puede agregar.");
+      return;
+    }
+
+    // Crear el nuevo cliente
+    const nuevoCliente = new Cliente(
+      respuestas.id.trim(),
+      respuestas.nombre,
+      respuestas.raza,
+      respuestas.ubicacion
+    );
+
+    // Agregar el nuevo cliente al arreglo
+    clientes.push(nuevoCliente);
+
+    // Guardar los cambios en el archivo JSON
+    await fs.writeFile("./db/Cliente.json", JSON.stringify(clientes, null, 2), "utf-8");
+    console.log("Cliente agregado con éxito.");
+  } catch (error) {
+    console.error("Error al agregar el cliente:", error.message);
+  }
 }
-
 
 /**
  * Funcion para eliminar un bien

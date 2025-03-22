@@ -16,5 +16,14 @@
     "gestorTransacciones": {
       "transacciones": []
     }
+  },
+  {
+    "_id": "2",
+    "_nombre": "2",
+    "_tipo": "2",
+    "_ubicacion": "2",
+    "gestorTransacciones": {
+      "transacciones": []
+    }
   }
 ]

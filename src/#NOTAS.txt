@@ -1,0 +1,4 @@
+AQUI PONEMOS LAS TAREAS QUE FALTAN POR HACER:
+
+- arreglar los agregar:  done
+- arreglar los eliminar:  
