@@ -4,5 +4,14 @@
     "_nombre": "d",
     "_raza": "d",
     "_ubicacion": "d"
+  },
+  {
+    "_idUnico": "45362",
+    "_nombre": "juan",
+    "_raza": "perro",
+    "_ubicacion": "paris",
+    "gestorTransacciones": {
+      "transacciones": []
+    }
   }
 ]

@@ -179,6 +179,5 @@ buscarCliente(nombre: string): Cliente | undefined {
   return this.clientes.find(cliente => cliente.nombre.toLowerCase() === nombre.toLowerCase());
 }
 
-
 }
 
