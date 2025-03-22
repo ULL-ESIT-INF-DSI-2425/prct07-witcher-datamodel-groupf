@@ -101,29 +101,22 @@ export class Inventario {
    */
   registrarVenta(clienteId: string, bienes: string[], cantidadCoronas: number, detalles: string): boolean {
     const cliente = this.clientes.find(cliente => cliente.idUnico === clienteId);
-    if (cliente) {
-      this.gestorTransacciones.registrarVenta(new Date(), bienes, cantidadCoronas, detalles);
-      return true;
+    if (!cliente) {
+      console.log("Cliente no encontrado.");
+      return false;
     }
-    return false;
+  
+    const bienesNoEncontrados = bienes.filter(bien => !this.bienes.some(b => b.nombre === bien));
+    if (bienesNoEncontrados.length > 0) {
+      console.log(`Los siguientes bienes no existen en el inventario: ${bienesNoEncontrados.join(", ")}`);
+      return false;
+    }
+  
+    this.gestorTransacciones.registrarVenta(new Date(), bienes, cantidadCoronas, detalles);
+    return true;
   }
 
-  /**
-   * Método para registrar una compra
-   * @param mercaderId - id del mercader
-   * @param bienes - bienes a comprar
-   * @param cantidadCoronas - cantidad de coronas
-   * @param detalles - detalles de la compra
-   * @returns true si se registró la compra, false en caso contrario
-   */
-  registrarCompra(mercaderId: string, bienes: string[], cantidadCoronas: number, detalles: string): boolean {
-    const mercader = this.mercaderes.find(mercader => mercader.idUnico === mercaderId);
-    if (mercader) {
-      this.gestorTransacciones.registrarCompra(new Date(), bienes, cantidadCoronas, detalles);
-      return true;
-    }
-    return false;
-  }
+
 
   /**
    * Método para registrar una devolución
@@ -151,6 +144,7 @@ export class Inventario {
     return false;
   }
 
+  
   /**
    * Método para obtener el historial de transacciones
    * @returns historial de transacciones

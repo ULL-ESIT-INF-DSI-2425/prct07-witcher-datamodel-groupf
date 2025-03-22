@@ -318,6 +318,7 @@ async function agregarBien() {
 
   inventario.agregarBien(nuevoBien);
   console.log("Bien añadido con éxito.");
+  await guardarBienesEnJSON(); // Guardar los cambios en el archivo JSON
 }
 
 /**
@@ -375,6 +376,7 @@ async function eliminarBien() {
 
   if (inventario.eliminarBien(respuestas.id)) {
     console.log("Bien eliminado con éxito.");
+    await guardarBienesEnJSON(); // Guardar los cambios en el archivo JSON
   } else {
     console.log("No se encontró el bien con el ID proporcionado.");
   }
@@ -431,6 +433,7 @@ async function modificarBien() {
     valorCoronas: respuestas.valor
   })) {
     console.log("Bien modificado con éxito.");
+    await guardarBienesEnJSON(); // Guardar los cambios en el archivo JSON
   } else {
     console.log("No se encontró el bien con el ID proporcionado.");
   }
@@ -455,6 +458,26 @@ async function modificarMercader() {
     console.log("Mercader modificado con éxito.");
   } else {
     console.log("No se encontró el mercader con el ID proporcionado.");
+  }
+}
+
+/**
+ * Función para registrar una venta
+ */
+async function registrarVenta() {
+  const respuestas = await inquirer.prompt([
+    { type: "input", name: "clienteId", message: "ID del cliente:" },
+    { type: "input", name: "bienes", message: "Bienes vendidos (separados por comas):" },
+    { type: "number", name: "cantidadCoronas", message: "Cantidad de coronas involucrada:" },
+    { type: "input", name: "detalles", message: "Detalles adicionales:" }
+  ]);
+
+  const bienes = respuestas.bienes.split(",").map((bien: string) => bien.trim());
+  const exito = inventario.registrarVenta(respuestas.clienteId, bienes, respuestas.cantidadCoronas, respuestas.detalles);
+  if (exito) {
+    console.log("Venta registrada con éxito.");
+  } else {
+    console.log("No se pudo registrar la venta. Verifica los datos ingresados.");
   }
 }
 
@@ -659,4 +682,33 @@ async function historialTransacciones() {
     });
   }
 }
+
+async function guardarBienesEnJSON(): Promise<void> {
+  try {
+    await fs.writeFile("./db/Bien.json", JSON.stringify(inventario.listarBienes(), null, 2), "utf-8");
+    console.log("Bienes guardados correctamente.");
+  } catch (error) {
+    console.error("Error al guardar los bienes:", error.message);
+  }
+}
+
+async function guardarMercaderesEnJSON(): Promise<void> {
+  try {
+    await fs.writeFile("./db/Mercader.json", JSON.stringify(inventario.listarMercaderes(), null, 2), "utf-8");
+    console.log("Mercaderes guardados correctamente.");
+  } catch (error) {
+    console.error("Error al guardar los mercaderes:", error.message);
+  }
+}
+
+async function guardarClientesEnJSON(): Promise<void> {
+  try {
+    await fs.writeFile("./db/Cliente.json", JSON.stringify(inventario.listarClientes(), null, 2), "utf-8");
+    console.log("Clientes guardados correctamente.");
+  } catch (error) {
+    console.error("Error al guardar los clientes:", error.message);
+  }
+}
+
+
 menuPrincipal();
