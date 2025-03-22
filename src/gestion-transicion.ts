@@ -49,4 +49,65 @@ export class GestorTransacciones {
   obtenerHistorial(): Transaccion[] {
     return this.transacciones;
   }
+
+  /**
+ * Método para obtener los bienes más vendidos
+ * @returns - Lista de bienes con la cantidad de veces que han sido vendidos
+ */
+  obtenerBienesMasVendidos(): { nombre: string, cantidad: number }[] {
+    const ventas = this.transacciones.filter(transaccion => transaccion.tipo === "venta");
+    const bienesVendidos: { [key: string]: number } = {};
+
+    ventas.forEach(venta => {
+        venta.bienes.forEach(bien => {
+            if (bienesVendidos[bien]) {
+                bienesVendidos[bien]++;
+            } else {
+                bienesVendidos[bien] = 1;
+            }
+        });
+    });
+
+    return Object.entries(bienesVendidos)
+        .map(([nombre, cantidad]) => ({ nombre, cantidad }))
+        .sort((a, b) => b.cantidad - a.cantidad);
+  }
+
+  /**
+ * Método para obtener el total de ingresos por ventas
+ * @returns - Total de ingresos por ventas
+ */
+  obtenerTotalIngresos(): number {
+    return this.transacciones
+        .filter(transaccion => transaccion.tipo === "venta")
+        .reduce((total, venta) => total + venta.cantidadCoronas, 0);
+  }
+
+  /**
+  * Método para obtener el total de gastos por compras
+  * @returns - Total de gastos por compras
+  */
+  obtenerTotalGastos(): number {
+    return this.transacciones
+        .filter(transaccion => transaccion.tipo === "compra")
+        .reduce((total, compra) => total + compra.cantidadCoronas, 0);
+  }
+
+
+/**
+ * Método para obtener el historial de transacciones de un cliente o mercader
+ * @param id - ID del cliente o mercader
+ * @param tipo - Tipo de actor ("cliente" o "mercader")
+ * @returns - Lista de transacciones relacionadas con el cliente o mercader
+ */
+  obtenerHistorialPorActor(id: string, tipo: "cliente" | "mercader"): Transaccion[] {
+    return this.transacciones.filter(transaccion => {
+        if (tipo === "cliente") {
+            return transaccion.tipo === "venta" && transaccion.bienes.includes(id);
+        } else if (tipo === "mercader") {
+            return transaccion.tipo === "compra" && transaccion.bienes.includes(id);
+        }
+        return false;
+    });
+  }
 }

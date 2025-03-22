@@ -21,6 +21,7 @@ async function menuPrincipal() {
         "Consultar",
         "Buscar",
         "Ordenar",
+        "Informes", 
         "Salir"
       ]
     }
@@ -44,6 +45,9 @@ async function menuPrincipal() {
       break;
     case "Ordenar":
       await menuOrdenar();
+      break;
+    case "Informes": 
+      await menuInformes();
       break;
     case "Salir":
       console.log("¡Hasta luego!");
@@ -251,6 +255,43 @@ async function menuOrdenar() {
   }
 
   await menuOrdenar();
+}
+
+// Submenú para Informes
+async function menuInformes() {
+  const respuesta = await inquirer.prompt([
+    {
+      type: "list",
+      name: "opcion",
+      message: "¿Qué informe deseas generar?",
+      choices: [
+        "Estado del stock de un bien",
+        "Bienes más vendidos",
+        "Total de ingresos y gastos",
+        "Historial de transacciones de un cliente o mercader",
+        "Volver al menú principal"
+      ]
+    }
+  ]);
+
+  switch (respuesta.opcion) {
+    case "Estado del stock de un bien":
+      await estadoStock();
+      break;
+    case "Bienes más vendidos":
+      await bienesMasVendidos();
+      break;
+    case "Total de ingresos y gastos":
+      await totalIngresosGastos();
+      break;
+    case "Historial de transacciones de un cliente o mercader":
+      await historialTransacciones();
+      break;
+    case "Volver al menú principal":
+      return;
+  }
+
+  await menuInformes();
 }
 
 /**
@@ -547,4 +588,75 @@ async function cargarClientesDesdeJSON() {
   }
 }
 
+// Funciones para generar informes
+async function estadoStock() {
+  const respuesta = await inquirer.prompt([
+    {
+      type: "list",
+      name: "tipo",
+      message: "¿Cómo deseas consultar el stock?",
+      choices: [
+        "Por nombre del bien",
+        "Por material del bien",
+        "Volver al menú de informes"
+      ]
+    }
+  ]);
+
+  if (respuesta.tipo === "Por nombre del bien") {
+    const respuestas = await inquirer.prompt([
+      { type: "input", name: "nombre", message: "Nombre del bien:" }
+    ]);
+    const stock = inventario.obtenerStockPorNombre(respuestas.nombre);
+    console.log(`Stock del bien "${respuestas.nombre}": ${stock}`);
+  } else if (respuesta.tipo === "Por material del bien") {
+    const respuestas = await inquirer.prompt([
+      { type: "input", name: "material", message: "Material del bien:" }
+    ]);
+    const stock = inventario.obtenerStockPorMaterial(respuestas.material);
+    console.log(`Stock de bienes con material "${respuestas.material}": ${stock}`);
+  }
+}
+
+async function bienesMasVendidos() {
+  const bienesVendidos = inventario.gestorTransaccioness.obtenerBienesMasVendidos();
+  console.log("Bienes más vendidos:");
+  bienesVendidos.forEach((bien, index) => {
+    console.log(`${index + 1}. ${bien.nombre}: ${bien.cantidad} ventas`);
+  });
+}
+
+async function totalIngresosGastos() {
+  const ingresos = inventario.gestorTransaccioness.obtenerTotalIngresos();
+  const gastos = inventario.gestorTransaccioness.obtenerTotalGastos();
+  console.log(`Total de ingresos por ventas: ${ingresos} coronas`);
+  console.log(`Total de gastos por compras: ${gastos} coronas`);
+  console.log(`Balance total: ${ingresos - gastos} coronas`);
+}
+
+async function historialTransacciones() {
+  const respuesta = await inquirer.prompt([
+    {
+      type: "list",
+      name: "tipo",
+      message: "¿De quién deseas obtener el historial?",
+      choices: [
+        "Cliente",
+        "Mercader",
+        "Volver al menú de informes"
+      ]
+    }
+  ]);
+
+  if (respuesta.tipo === "Cliente" || respuesta.tipo === "Mercader") {
+    const respuestas = await inquirer.prompt([
+      { type: "input", name: "id", message: `ID del ${respuesta.tipo.toLowerCase()}:` }
+    ]);
+    const historial = inventario.gestorTransaccioness.obtenerHistorialPorActor(respuestas.id, respuesta.tipo.toLowerCase());
+    console.log(`Historial de transacciones:`);
+    historial.forEach((transaccion, index) => {
+      console.log(`${index + 1}. Tipo: ${transaccion.tipo}, Fecha: ${transaccion.fecha}, Bienes: ${transaccion.bienes.join(", ")}, Coronas: ${transaccion.cantidadCoronas}`);
+    });
+  }
+}
 menuPrincipal();

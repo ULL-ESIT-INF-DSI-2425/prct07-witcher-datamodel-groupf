@@ -13,6 +13,11 @@ export class Inventario {
   private clientes: Cliente[] = [];
   private gestorTransacciones: GestorTransacciones;
 
+  // Getters
+  get gestorTransaccioness(): GestorTransacciones {
+    return this.gestorTransacciones;
+  }
+  
   /**
    * Constructor de la clase Inventario
    */
@@ -280,5 +285,22 @@ export class Inventario {
   buscarCliente(nombre: string): Cliente | undefined {
     return this.clientes.find(cliente => cliente.nombre.toLowerCase() === nombre.toLowerCase());
   }
-}
 
+  /**
+ * Método para obtener el stock de un bien por su nombre
+ * @param nombre - nombre del bien a consultar
+ * @returns - cantidad de bienes con ese nombre
+ */
+  obtenerStockPorNombre(nombre: string): number {
+    return this.bienes.filter(bien => bien.nombre.toLowerCase() === nombre.toLowerCase()).length;
+  }
+
+  /**
+ * Método para obtener el stock de bienes por tipo de material
+ * @param material - material del bien a consultar
+ * @returns - cantidad de bienes con ese material
+ */
+  obtenerStockPorMaterial(material: string): number {
+    return this.bienes.filter(bien => bien.material.toLowerCase() === material.toLowerCase()).length;
+  }
+}

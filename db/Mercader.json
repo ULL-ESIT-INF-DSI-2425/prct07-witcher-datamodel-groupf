@@ -61,5 +61,14 @@
     "gestorTransacciones": {
       "transacciones": []
     }
+  },
+  {
+    "_id": "pepe",
+    "_nombre": "ayoze",
+    "_tipo": "pez",
+    "_ubicacion": "londres",
+    "gestorTransacciones": {
+      "transacciones": []
+    }
   }
 ]

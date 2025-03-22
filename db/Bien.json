@@ -222,5 +222,13 @@
     "_material": "hierro",
     "_peso": 23,
     "_valorCoronas": 1000
+  },
+  {
+    "_idUnico": "hola",
+    "_nombre": "pepe",
+    "_descripcion": "adios",
+    "_material": "madera",
+    "_peso": 76,
+    "_valorCoronas": 100
   }
 ]
