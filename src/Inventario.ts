@@ -108,58 +108,58 @@ export class Inventario {
     return false;
   }
 
-  /**
-   * Método para registrar una venta
-   * @param clienteId - id del cliente
-   * @param bienes - bienes a vender
-   * @param cantidadCoronas - cantidad de coronas
-   * @param detalles - detalles de la venta
-   * @returns true si se registró la venta, false en caso contrario
-   */
-  registrarVenta(clienteId: string, bienes: string[], cantidadCoronas: number, detalles: string): boolean {
-    const cliente = this.clientes.find(cliente => cliente.idUnico === clienteId);
-    if (!cliente) {
-      console.log("Cliente no encontrado.");
-      return false;
-    }
+  // /**
+  //  * Método para registrar una venta
+  //  * @param clienteId - id del cliente
+  //  * @param bienes - bienes a vender
+  //  * @param cantidadCoronas - cantidad de coronas
+  //  * @param detalles - detalles de la venta
+  //  * @returns true si se registró la venta, false en caso contrario
+  //  */
+  // registrarVenta(clienteId: string, bienes: string[], cantidadCoronas: number): boolean {
+  //   const cliente = this.clientes.find(cliente => cliente.idUnico === clienteId);
+  //   if (!cliente) {
+  //     console.log("Cliente no encontrado.");
+  //     return false;
+  //   }
   
-    const bienesNoEncontrados = bienes.filter(bien => !this.bienes.some(b => b.nombre === bien));
-    if (bienesNoEncontrados.length > 0) {
-      console.log(`Los siguientes bienes no existen en el inventario: ${bienesNoEncontrados.join(", ")}`);
-      return false;
-    }
+  //   const bienesNoEncontrados = bienes.filter(bien => !this.bienes.some(b => b.nombre === bien));
+  //   if (bienesNoEncontrados.length > 0) {
+  //     console.log(`Los siguientes bienes no existen en el inventario: ${bienesNoEncontrados.join(", ")}`);
+  //     return false;
+  //   }
   
-    this.gestorTransacciones.registrarVenta(new Date(), bienes, cantidadCoronas, detalles);
-    return true;
-  }
+  //   this.gestorTransacciones.registrarVenta(new Date(), bienes, cantidadCoronas);
+  //   return true;
+  // }
 
 
 
-  /**
-   * Método para registrar una devolución
-   * @param actorId - id del actor
-   * @param bienes - bienes a devolver
-   * @param cantidadCoronas - cantidad de coronas
-   * @param detalles - detalles de la devolución
-   * @param tipo - tipo de actor
-   * @returns true si se registró la devolución, false en caso contrario
-   */
-  registrarDevolucion(actorId: string, bienes: string[], cantidadCoronas: number, detalles: string, tipo: "cliente" | "mercader"): boolean {
-    if (tipo === "cliente") {
-      const cliente = this.clientes.find(cliente => cliente.idUnico === actorId);
-      if (cliente) {
-        this.gestorTransacciones.registrarDevolucion(new Date(), bienes, cantidadCoronas, detalles);
-        return true;
-      }
-    } else if (tipo === "mercader") {
-      const mercader = this.mercaderes.find(mercader => mercader.idUnico === actorId);
-      if (mercader) {
-        this.gestorTransacciones.registrarDevolucion(new Date(), bienes, cantidadCoronas, detalles);
-        return true;
-      }
-    }
-    return false;
-  }
+  // /**
+  //  * Método para registrar una devolución
+  //  * @param actorId - id del actor
+  //  * @param bienes - bienes a devolver
+  //  * @param cantidadCoronas - cantidad de coronas
+  //  * @param detalles - detalles de la devolución
+  //  * @param tipo - tipo de actor
+  //  * @returns true si se registró la devolución, false en caso contrario
+  //  */
+  // registrarDevolucion(actorId: string, bienes: string[], cantidadCoronas: number, detalles: string, tipo: "cliente" | "mercader"): boolean {
+  //   if (tipo === "cliente") {
+  //     const cliente = this.clientes.find(cliente => cliente.idUnico === actorId);
+  //     if (cliente) {
+  //       this.gestorTransacciones.registrarDevolucion(new Date(), bienes, cantidadCoronas);
+  //       return true;
+  //     }
+  //   } else if (tipo === "mercader") {
+  //     const mercader = this.mercaderes.find(mercader => mercader.idUnico === actorId);
+  //     if (mercader) {
+  //       this.gestorTransacciones.registrarDevolucion(new Date(), bienes, cantidadCoronas);
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   
   /**
@@ -342,4 +342,11 @@ export class Inventario {
   obtenerStockPorMaterial(material: string): number {
     return this.bienes.filter(bien => bien.material.toLowerCase() === material.toLowerCase()).length;
   }
+
+  // funcion para saber el tamaño del vector de bienes
+  stock_size(): number {
+    return this.bienes.length;
+  }
+
+  
 }

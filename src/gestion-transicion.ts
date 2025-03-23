@@ -13,34 +13,11 @@ export class GestorTransacciones {
    * @param cantidadCoronas - Cantidad de coronas involucrada
    * @param detalles - Detalles adicionales
    */
-  registrarVenta(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
-    const transaccion = new Transaccion("venta", fecha, bienes, cantidadCoronas, detalles);
+  registrarVenta(fecha: Date, bienes: string[], cantidadCoronas: number): void {
+    const transaccion = new Transaccion("venta", fecha, bienes, cantidadCoronas);
     this.transacciones.push(transaccion);
   }
 
-  /**
-   * Método para registrar una compra
-   * @param fecha - Fecha de la compra
-   * @param bienes - Bienes intercambiados
-   * @param cantidadCoronas - Cantidad de coronas involucrada
-   * @param detalles - Detalles adicionales
-   */
-  registrarCompra(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
-    const transaccion = new Transaccion("compra", fecha, bienes, cantidadCoronas, detalles);
-    this.transacciones.push(transaccion);
-  }
-
-  /**
-   * Método para registrar una devolución
-   * @param fecha - Fecha de la devolución
-   * @param bienes - Bienes devueltos
-   * @param cantidadCoronas - Cantidad de coronas involucrada
-   * @param detalles - Detalles adicionales
-   */
-  registrarDevolucion(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
-    const transaccion = new Transaccion("devolucion", fecha, bienes, cantidadCoronas, detalles);
-    this.transacciones.push(transaccion);
-  }
 
   /**
    * Método para obtener el historial de transacciones

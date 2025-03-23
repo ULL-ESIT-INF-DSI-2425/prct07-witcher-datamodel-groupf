@@ -101,44 +101,44 @@ export class Cliente {
 
   // Métodos para interactuar con el gestor de transacciones
 
-  /**
-   * Registra una venta realizada por el cliente
-   * @param fecha - Fecha de la venta
-   * @param bienes - Bienes intercambiados
-   * @param cantidadCoronas - Cantidad de coronas involucrada
-   * @param detalles - Detalles adicionales
-   */
-  registrarVenta(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
-    this.gestorTransacciones.registrarVenta(fecha, bienes, cantidadCoronas, detalles);
-  }
+  // /**
+  //  * Registra una venta realizada por el cliente
+  //  * @param fecha - Fecha de la venta
+  //  * @param bienes - Bienes intercambiados
+  //  * @param cantidadCoronas - Cantidad de coronas involucrada
+  //  * @param detalles - Detalles adicionales
+  //  */
+  // registrarVenta(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
+  //   this.gestorTransacciones.registrarVenta(fecha, bienes, cantidadCoronas, detalles);
+  // }
 
-  /**
-   * Registra una compra realizada por el cliente
-   * @param fecha - Fecha de la compra
-   * @param bienes - Bienes intercambiados
-   * @param cantidadCoronas - Cantidad de coronas involucrada
-   * @param detalles - Detalles adicionales
-   */
-  registrarCompra(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
-    this.gestorTransacciones.registrarCompra(fecha, bienes, cantidadCoronas, detalles);
-  }
+  // /**
+  //  * Registra una compra realizada por el cliente
+  //  * @param fecha - Fecha de la compra
+  //  * @param bienes - Bienes intercambiados
+  //  * @param cantidadCoronas - Cantidad de coronas involucrada
+  //  * @param detalles - Detalles adicionales
+  //  */
+  // registrarCompra(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
+  //   this.gestorTransacciones.registrarCompra(fecha, bienes, cantidadCoronas, detalles);
+  // }
 
-  /**
-   * Registra una devolución realizada por el cliente
-   * @param fecha - Fecha de la devolución
-   * @param bienes - Bienes devueltos
-   * @param cantidadCoronas - Cantidad de coronas involucrada
-   * @param detalles - Detalles adicionales
-   */
-  registrarDevolucion(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
-    this.gestorTransacciones.registrarDevolucion(fecha, bienes, cantidadCoronas, detalles);
-  }
+  // /**
+  //  * Registra una devolución realizada por el cliente
+  //  * @param fecha - Fecha de la devolución
+  //  * @param bienes - Bienes devueltos
+  //  * @param cantidadCoronas - Cantidad de coronas involucrada
+  //  * @param detalles - Detalles adicionales
+  //  */
+  // registrarDevolucion(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
+  //   this.gestorTransacciones.registrarDevolucion(fecha, bienes, cantidadCoronas, detalles);
+  // }
 
-  /**
-   * Obtiene el historial de transacciones del cliente
-   * @returns - Historial de transacciones
-   */
-  obtenerHistorialTransacciones(): Transaccion[] {
-    return this.gestorTransacciones.obtenerHistorial();
-  }
+  // /**
+  //  * Obtiene el historial de transacciones del cliente
+  //  * @returns - Historial de transacciones
+  //  */
+  // obtenerHistorialTransacciones(): Transaccion[] {
+  //   return this.gestorTransacciones.obtenerHistorial();
+  // }
 }

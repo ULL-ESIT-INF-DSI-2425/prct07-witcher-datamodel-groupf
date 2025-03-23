@@ -548,39 +548,6 @@ export async function ordenarBienesPorValor(opt: boolean) {
 }
 
 
-
-
-
-// Funciones para generar informes
-export async function estadoStock() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "tipo",
-      message: "¿Cómo deseas consultar el stock?",
-      choices: [
-        "Por nombre del bien",
-        "Por material del bien",
-        "Volver al menú de informes"
-      ]
-    }
-  ]);
-
-  if (respuesta.tipo === "Por nombre del bien") {
-    const respuestas = await inquirer.prompt([
-      { type: "input", name: "nombre", message: "Nombre del bien:" }
-    ]);
-    const stock = inventario.obtenerStockPorNombre(respuestas.nombre);
-    console.log(`Stock del bien "${respuestas.nombre}": ${stock}`);
-  } else if (respuesta.tipo === "Por material del bien") {
-    const respuestas = await inquirer.prompt([
-      { type: "input", name: "material", message: "Material del bien:" }
-    ]);
-    const stock = inventario.obtenerStockPorMaterial(respuestas.material);
-    console.log(`Stock de bienes con material "${respuestas.material}": ${stock}`);
-  }
-}
-
 export async function bienesMasVendidos() {
   const bienesVendidos = inventario.gestorTransaccioness.obtenerBienesMasVendidos();
   console.log("Bienes más vendidos:");
@@ -620,5 +587,29 @@ export async function historialTransacciones() {
     historial.forEach((transaccion, index) => {
       console.log(`${index + 1}. Tipo: ${transaccion.tipo}, Fecha: ${transaccion.fecha}, Bienes: ${transaccion.bienes.join(", ")}, Coronas: ${transaccion.cantidadCoronas}`);
     });
+  }
+}
+
+
+// funcion para mostrar el stok de un bien en concreto
+export async function stockDeUnBien() {
+  // pide al usuario el nombre del bien, como lo hacen las otras funciones
+  const respuestas = await inquirer.prompt([
+    { type: "input", name: "nombre", message: "Nombre del bien a buscar:" }
+  ]);
+  try {
+    // cargar todo desde el archivo JSON
+    await cargarTodoDesdeJSON();
+    // Guardar en una variable lo que devuelve el inventario al buscar
+    const resultado = inventario.obtenerStockPorNombre(respuestas.nombre);
+    if (resultado) {
+      console.log(`Stock del bien "${respuestas.nombre}":`);
+      console.log(resultado);
+    } else {
+      console.log(`No se encontró el bien con el nombre "${respuestas.nombre}".`);
+    }
+  }
+  catch (error) {
+    console.error("Error al buscar el bien:", error.message);
   }
 }

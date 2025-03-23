@@ -7,6 +7,5 @@ export class Transaccion {
       public fecha: Date,
       public bienes: string[],
       public cantidadCoronas: number,
-      public detalles: string
     ) {}
-  }
+}

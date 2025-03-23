@@ -18,6 +18,7 @@ async function menuPrincipal() {
         "Buscar",
         "Ordenar",
         "Informes",
+    //    "Hacer transicion",
         "Salir"
       ]
     }
@@ -45,6 +46,9 @@ async function menuPrincipal() {
     case "Informes":
       await menuInformes();
       break;
+      // case: "Hacer trancisiones":
+      // await menuComprasVentas();
+     // break;
     case "Salir":
       console.log("¡Hasta luego!");
       return;
@@ -187,7 +191,6 @@ async function menuConsultar() {
 
   await menuConsultar(); 
 
-  
 
 }
 
@@ -254,7 +257,7 @@ async function menuBuscarBien() {
       break;
     case "Volver al menú anterior":
       return;
-  }name
+  }
 
   await menuBuscarBien();
 }
@@ -403,6 +406,10 @@ async function menuOrdenar() {
 
 
   
+
+
+
+
 // Submenú para Informes
 async function menuInformes() {
   const respuesta = await inquirer.prompt([
@@ -411,18 +418,19 @@ async function menuInformes() {
       name: "opcion",
       message: "¿Qué informe deseas generar?",
       choices: [
-        "Estado del stock de un bien",
+        "Cantidad del stock",
         "Bienes más vendidos",
         "Total de ingresos y gastos",
         "Historial de transacciones de un cliente o mercader",
-        "Volver al menú principal"
+        "Volver al menú principal",
+        ""
       ]
     }
   ]);
 
   switch (respuesta.opcion) {
-    case "Estado del stock de un bien":
-      await Funcionamiento.estadoStock();
+    case "Cantidad del stock":
+      await Funcionamiento.stockDeUnBien();
       break;
     case "Bienes más vendidos":
       await Funcionamiento.bienesMasVendidos();
@@ -439,5 +447,64 @@ async function menuInformes() {
 
   await menuInformes();
 }
+
+// // Menú principal de compras y ventas
+// async function menuComprasVentas() {
+//   const respuesta = await inquirer.prompt([
+//     {
+//       type: "list",
+//       name: "accion",
+//       message: "¿Qué acción deseas realizar?",
+//       choices: [
+//         "Comprar",
+//         "Vender",
+//         "Volver al menú principal"
+//       ]
+//     }
+//   ]);
+
+//   switch (respuesta.accion) {
+//     case "Comprar":
+//       await menuComprar();
+//       break;
+//     case "Vender":
+//       await menuVender();
+//       break;
+//     case "Volver al menú principal":
+//       return;
+//   }
+
+//   await menuComprasVentas();
+// }
+
+// // Submenú para Comprar
+// async function menuComprar() {
+//   const respuesta = await inquirer.prompt([
+//     {
+//       type: "input",
+//       name: "comprador",
+//       message: "¿Quién está comprando?"
+//     }
+//   ]);
+
+//   console.log(`El comprador es: ${respuesta.comprador}`);
+//   await Funcionamiento.realizarCompra(respuesta.comprador);
+//   await menuComprasVentas();
+// }
+
+// // Submenú para Vender
+// async function menuVender() {
+//   const respuesta = await inquirer.prompt([
+//     {
+//       type: "input",
+//       name: "vendedor",
+//       message: "¿Quién está vendiendo?"
+//     }
+//   ]);
+
+//   console.log(`El vendedor es: ${respuesta.vendedor}`);
+//   await Funcionamiento.realizarVenta(respuesta.vendedor);
+//   await menuComprasVentas();
+// }
 
 menuPrincipal();
