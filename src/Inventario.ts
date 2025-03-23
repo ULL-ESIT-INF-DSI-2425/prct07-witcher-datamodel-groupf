@@ -338,7 +338,7 @@ export class Inventario {
    * Metodo para vender un bien
    * @param id - id del cliente
    * @param id_bien - id del bien a vender
-   * @returns - true si se realizó la venta, false en caso contrario
+   * @returns - true si se realizó la venta, false en caso contrario .
    */
   vender(id: string, id_bien: string): boolean {
     const cliente = this.clientes.find(cliente => cliente.idUnico === id);

@@ -1,6 +1,0 @@
-AQUI PONEMOS LAS TAREAS QUE FALTAN POR HACER:
-
-- arreglar los agregar:  done
-- arreglar los eliminar:  done
-- arreglar modificar: done
-- arreglar buscar bien por nombre:   ----- HACER
