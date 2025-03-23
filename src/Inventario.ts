@@ -205,41 +205,45 @@ export class Inventario {
   }
 
   // funcion para buscar, se le pasa por parametros el nombre del vector que desea buscar y el nombre del atributo, y busca segun   el nombre que se le pase
-  buscar(nombre: string, atributo: string, busca: string | number): Bien | Mercader | Cliente | undefined {
+  buscar(nombre: string, atributo: string, busca: string | number): Bien[] | Mercader[] | Cliente[] | undefined {
+    console.log(atributo)
     // si el nombre del vector es igual a bienes
     if (nombre === "bienes") {
       // si el atributo es nombre, busca por nombre, si es material, busca por material ...
       if (atributo === "nombre") {
         console.log("aaaaaaaaaaaaaaaa")
-        return this.bienes.find(bien => bien.nombre === busca);
+        return this.bienes.filter(bien => bien.nombre === busca);
       } else if (atributo === "material") {
-        return this.bienes.find(bien => bien.material === busca);
+        return this.bienes.filter(bien => bien.material === busca);
       } else if (atributo === "peso") {
-        return this.bienes.find(bien => bien.peso === busca);
+        return this.bienes.filter(bien => bien.peso === busca);
       } else if (atributo === "valorCoronas") {
-        return this.bienes.find(bien => bien.valorCoronas === busca);
+        return this.bienes.filter(bien => bien.valorCoronas === busca);
+      } else if (atributo === "descripcion") {
+        console.log("descp")
+        return this.bienes.filter(bien => bien.descripcion === busca);
       }
     }
     // si el nombre del vector es igual a mercaderes
     if (nombre === "mercaderes") {
       // si el atributo es nombre, busca por nombre, si es tipo, busca por tipo ...
       if (atributo === "nombre") {
-        return this.mercaderes.find(mercader => mercader.nombre === busca);
+        return this.mercaderes.filter(mercader => mercader.nombre === busca);
       } else if (atributo === "tipo") {
-        return this.mercaderes.find(mercader => mercader.tipo === busca);
+        return this.mercaderes.filter(mercader => mercader.tipo === busca);
       } else if (atributo === "ubicacion") {
-        return this.mercaderes.find(mercader => mercader.ubicacion === busca);
+        return this.mercaderes.filter(mercader => mercader.ubicacion === busca);
       }
     }
     // si el nombre del vector es igual a clientes
     if (nombre === "clientes") {
       // si el atributo es nombre, busca por nombre, si es raza, busca por raza ...
       if (atributo === "nombre") {
-        return this.clientes.find(cliente => cliente.nombre === busca);
+        return this.clientes.filter(cliente => cliente.nombre === busca);
       } else if (atributo === "raza") {
-        return this.clientes.find(cliente => cliente.raza === busca);
+        return this.clientes.filter(cliente => cliente.raza === busca);
       } else if (atributo === "ubicacion") {
-        return this.clientes.find(cliente => cliente.ubicacion === busca);
+        return this.clientes.filter(cliente => cliente.ubicacion === busca);
       }
     }
     return undefined;

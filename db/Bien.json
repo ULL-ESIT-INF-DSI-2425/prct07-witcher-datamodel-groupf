@@ -9,7 +9,7 @@
   },
   {
     "_idUnico": "3",
-    "_nombre": "2",
+    "_nombre": "a",
     "_descripcion": "2",
     "_material": "2",
     "_peso": 2,
@@ -17,7 +17,7 @@
   },
   {
     "_idUnico": "4",
-    "_nombre": "2",
+    "_nombre": "c",
     "_descripcion": "2",
     "_material": "2",
     "_peso": 2,
@@ -25,10 +25,18 @@
   },
   {
     "_idUnico": "1",
-    "_nombre": "1",
-    "_descripcion": "1",
-    "_material": "1",
-    "_peso": 1,
-    "_valorCoronas": 1
+    "_nombre": "d",
+    "_descripcion": "2",
+    "_material": "2",
+    "_peso": 2,
+    "_valorCoronas": 2
+  },
+  {
+    "_idUnico": "5",
+    "_nombre": "h",
+    "_descripcion": "5",
+    "_material": "5",
+    "_peso": 5,
+    "_valorCoronas": 5
   }
 ]

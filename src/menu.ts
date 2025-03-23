@@ -1,6 +1,7 @@
 import inquirer from "inquirer";
 import * as Funcionamiento from "./Funcionamiento.js";
-import { Inventario } from "./Inventario.js";
+
+
 
 // Menú principal   
 async function menuPrincipal() {
@@ -184,7 +185,9 @@ async function menuConsultar() {
     return;
   }
 
-  await menuConsultar();const inventario = new Inventario();
+  await menuConsultar(); 
+
+  
 
 }
 
@@ -232,7 +235,7 @@ async function menuBuscarBien() {
       message: "¿Cómo deseas buscar el bien?",
       choices: [
         "Por nombre",
-        "Por Dscripcion",
+        "Por Descripcion",
         "Por Material",
         "Volver al menú anterior"
       ]
@@ -243,15 +246,15 @@ async function menuBuscarBien() {
     case "Por nombre":
       await Funcionamiento.buscar("bienes", "nombre");
       break;
-    case "Por tipo":
+    case "Por Descripcion":
       await Funcionamiento.buscar("bienes", "descripcion");
       break;
-    case "Por ubicación":
+    case "Por Material":
       await Funcionamiento.buscar("bienes", "material");
       break;
     case "Volver al menú anterior":
       return;
-  }
+  }name
 
   await menuBuscarBien();
 }
@@ -276,7 +279,7 @@ async function menuBuscarMercader() {
       case "Por nombre":
         await Funcionamiento.buscar("mercaderes", "nombre");
         break;
-      case "Por región":
+      case "Por tipo":
         await Funcionamiento.buscar("mercaderes", "tipo");
         break;
       case "Por ubicación":
@@ -366,8 +369,30 @@ async function menuOrdenar() {
             }
             break;
         }
-        case "Ordenar bienes por valor":
-            break;
+        case "Ordenar bienes por valor": {
+          // llamar a cargarBienesDesdeJSON
+          await Funcionamiento.cargarTodoDesdeJSON();
+          // preguntar si se quiere ordenar de forma ascendente o descendente
+          const respuesta = await inquirer.prompt([
+              {
+                type: "list",
+                name: "opcion",
+                message: "¿Cómo deseas ordenar los bienes?",
+                choices: [
+                  "Ascendente",
+                  "Descendente",
+                ]
+              }
+            ]);
+
+          // llamar a ordenarBienesPorNombre
+          if (respuesta.opcion === "Ascendente") {
+              await Funcionamiento.ordenarBienesPorValor(true);
+          } else {
+              await Funcionamiento.ordenarBienesPorValor(false);
+          }
+          break;
+        }
 
         case "Volver al menú principal":
             return;
@@ -414,10 +439,5 @@ async function menuInformes() {
 
   await menuInformes();
 }
-
-
-
-
-
 
 menuPrincipal();

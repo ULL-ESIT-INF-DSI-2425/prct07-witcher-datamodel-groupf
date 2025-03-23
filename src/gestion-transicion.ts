@@ -6,7 +6,7 @@ import { Transaccion } from "./trancision.js";
 export class GestorTransacciones {
   private transacciones: Transaccion[] = []; 
 
-  /**
+  /** 
    * Método para registrar una venta
    * @param fecha - Fecha de la venta
    * @param bienes - Bienes intercambiados

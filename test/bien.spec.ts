@@ -1,5 +1,5 @@
 import { describe, expect, test, beforeEach } from "vitest";
-import { Bien } from "../src/bienes";
+import { Bien } from "../src/models/bienes.js";
 
 describe("Bien", () => {
   let bien: Bien;
@@ -12,7 +12,7 @@ describe("Bien", () => {
       "Plata",
       3.5,
       1500
-    );
+    ); 
   });
 
   test("debería crear un bien correctamente", () => {

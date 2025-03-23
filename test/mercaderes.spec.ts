@@ -1,5 +1,5 @@
 import { describe, expect, test, beforeEach } from "vitest";
-import { Mercader } from "../src/mercaderes";
+import { Mercader } from "../src/models/mercaderes.js";
 
 describe("Mercader", () => {
   let mercader: Mercader;

@@ -21,6 +21,9 @@ export async function agregarBien() {
   ]);
 
   try {
+    // cargar todo desde el archivo JSON
+    await cargarTodoDesdeJSON();
+
     // comprueba que no exista un bien con el mismo id
     const existe = inventario.buscarBienPorId(respuestas.id);
     if (existe) {
@@ -57,6 +60,9 @@ export async function agregarMercader() {
   ]);
 
   try {
+    // cargar todo desde el archivo JSON
+    await cargarTodoDesdeJSON();
+
     // Verificar si ya existe un mercader con el mismo ID
     const existe = inventario.buscarMercaderPorId(respuestas.id.trim());
     if (existe) {
@@ -92,6 +98,9 @@ export async function agregarCliente() {
   ]);
 
   try {
+    // cargar todo desde el archivo JSON
+    await cargarTodoDesdeJSON();
+
     // Verificar si ya existe un cliente con el mismo ID
     const existe = inventario.buscarClientePorId(respuestas.id.trim());
     if (existe) {
@@ -390,7 +399,7 @@ export async function modificarCliente() {
 }
 
 /**
- * Función para buscar un elemento según un tipo y un valor, solicitando al usuario el valor a buscar.
+ * Función para buscar un elemento según un tipo y un valor, solicitan do al usuario el valor a buscar.
  */
 export async function buscar(tipo: string, valor: string) {
   // Preguntar al usuario el valor a buscar según el tipo
@@ -402,12 +411,14 @@ export async function buscar(tipo: string, valor: string) {
     }
   ]);
 
-  const buscar = respuestas.buscar.trim();
-
+  
+  const buscar = respuestas.buscar.trim();  
+    console.log("Buscando en el tipo: ", tipo);
   try {
     // cargar todo desde el archivo JSON
     await cargarTodoDesdeJSON();
     // Guardar en una variable lo que devuelve el inventario al buscar
+    console.log("Valores", tipo, valor, buscar)
     const resultado = inventario.buscar(tipo, valor, buscar);
 
     if (resultado) {
@@ -442,8 +453,6 @@ export async function cargarBienesDesdeJSON() {
         )
       );
     });
-
-    console.log("Bienes cargados desde el archivo JSON.");
   } catch (error) {
     console.error("Error al cargar los bienes desde el archivo JSON:", error.message);
   }
@@ -464,8 +473,6 @@ export async function cargarClientesDesdeJSON() {
         new Cliente(cliente._idUnico, cliente._nombre, cliente._raza, cliente._ubicacion)
       );
     });
-
-    console.log("Clientes cargados desde el archivo JSON.");
   } catch (error) {
     console.error("Error al cargar los clientes desde el archivo JSON:", error.message);
   }
@@ -488,8 +495,6 @@ export async function cargarMercaderesDesdeJSON() {
         new Mercader(mercader._id, mercader._nombre, mercader._tipo, mercader._ubicacion)
       );
     });
-
-    console.log("Mercaderes cargados desde el archivo JSON.");
   } catch (error) {
     console.error("Error al cargar los mercaderes desde el archivo JSON:", error.message);
   }
@@ -506,7 +511,6 @@ export async function cargarTodoDesdeJSON() {
     await cargarBienesDesdeJSON();
     await cargarClientesDesdeJSON();
     await cargarMercaderesDesdeJSON();
-    console.log("Todo cargado desde el archivo JSON.");
   } catch (error) {
     console.error("Error al cargar todo desde el archivo JSON:", error.message);
   }
@@ -515,8 +519,37 @@ export async function cargarTodoDesdeJSON() {
 
 // funcion para ordenar los bienes por nombre
 export async function ordenarBienesPorNombre(opt: boolean) {
-
+  // cargar todo desde el archivo JSON
+  await cargarTodoDesdeJSON();
+  // preguntar si se quiere ordenar de forma ascendente o descendente
+  if (opt) {
+    let bienes = inventario.ordenarBienesPorNombre(true);
+    // muestra el vector de bienes ordenado
+    console.log(bienes);
+  } else {
+    let bienes = inventario.ordenarBienesPorNombre(false);
+    console.log(bienes);
+  }
 }
+
+// funcion para ordenar los bienes por nombre
+export async function ordenarBienesPorValor(opt: boolean) {
+  // cargar todo desde el archivo JSON
+  await cargarTodoDesdeJSON();
+  // preguntar si se quiere ordenar de forma ascendente o descendente
+  if (opt) {
+    let bienes = inventario.ordenarBienesPorValor(true);
+    // muestra el vector de bienes ordenado
+    console.log(bienes);
+  } else {
+    let bienes = inventario.ordenarBienesPorValor(false);
+    console.log(bienes);
+  }
+}
+
+
+
+
 
 // Funciones para generar informes
 export async function estadoStock() {
