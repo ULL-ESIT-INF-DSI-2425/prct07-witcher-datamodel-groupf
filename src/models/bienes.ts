@@ -20,6 +20,10 @@ export class Bien {
       private _peso: number,
       private _valorCoronas: number
   ) {
+  }
+
+  // funcion para guardar los datos en la base de datos
+  guardarDatos() {
     DatabaseManager.guardarDatos('Bien', this);
   }
 

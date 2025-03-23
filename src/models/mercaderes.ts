@@ -21,7 +21,10 @@ export class Mercader {
     private _tipo: string,
     private _ubicacion: string,
   ) {
-    this.gestorTransacciones = new GestorTransacciones();
+  }
+
+  // funcion para guardar los datos en la base de datos
+  guardarDatos() {
     DatabaseManager.guardarDatos('Mercader', this);
   }
 

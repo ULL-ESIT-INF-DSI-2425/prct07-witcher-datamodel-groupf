@@ -27,6 +27,14 @@ export class Inventario {
     return this.bienes.find(bien => bien.idUnico === id);
   }
 
+  buscarMercaderPorId(id: string): Mercader | undefined {
+    return this.mercaderes.find(mercader => mercader.idUnico === id);
+  }
+
+  buscarClientePorId(id: string): Cliente | undefined {
+    return this.clientes.find(cliente => cliente.idUnico === id);
+  }
+
   /**
    * Constructor de la clase Inventario
    */
@@ -64,23 +72,12 @@ export class Inventario {
    * @returns true si se eliminó el bien, false en caso contrario
    */
   eliminarBien(id: string): boolean {
-    console.log("Buscando bien...");
-    console.log("ID proporcionado: ", id);
-    console.log("Bienes actuales en el inventario: ", this.bienes);
-  
-    // Buscar el índice del bien utilizando el campo correcto (_idUnico)
-    const indice = this.bienes.findIndex(bien => bien.idUnico === id);
-    console.log("Índice encontrado: ", indice);
-  
-    if (indice !== -1) {
-      console.log("Eliminando bien...");
-      this.bienes.splice(indice, 1); // Eliminar el bien del arreglo
-      console.log("Bien eliminado. Inventario actualizado: ", this.bienes);
+    const index = this.bienes.findIndex(bien => bien.idUnico === id);
+    if (index !== -1) {
+      this.bienes.splice(index, 1);
       return true;
     }
-  
-    console.log("No se encontró el bien con el ID proporcionado.");
-    return false; // No se encontró el bien con el ID proporcionado
+    return false;
   }
 
   /**
@@ -177,16 +174,26 @@ export class Inventario {
    * Metodo para listar los bienes
    * @returns - bienes
    */
-  listarBienes(): Bien[] {
-    return this.bienes;
+  listarBienes(){
+    // muestra todo el vector de bienes
+    console.log(this.bienes);
   }
 
   /**
    * Metodo para listar los mercaderes
    * @returns - mercaderes
    */
-  listarMercaderes(): Mercader[] {
-    return this.mercaderes;
+  listarMercaderes(){
+    // muestra todo el vector de mercaderes
+    console.log(this.mercaderes);
+  }
+
+  /**
+   * Metodo para listar los clientes
+   * @returns - clientesinventario
+   */
+  listarClientes(): Cliente[] {
+    return this.clientes;
   }
 
     limpiarMercaderes() {
@@ -196,17 +203,47 @@ export class Inventario {
   limpiarClientes() {
     this.clientes = [];
   }
-  /**
-   * Metodo para listar los clientes
-   * @returns - clientesinventario
-   */
-  listarClientes(): Cliente[] {
-    return this.clientes;
+
+  // funcion para buscar, se le pasa por parametros el nombre del vector que desea buscar y el nombre del atributo, y busca segun   el nombre que se le pase
+  buscar(nombre: string, atributo: string, busca: string | number): Bien | Mercader | Cliente | undefined {
+    // si el nombre del vector es igual a bienes
+    if (nombre === "bienes") {
+      // si el atributo es nombre, busca por nombre, si es material, busca por material ...
+      if (atributo === "nombre") {
+        console.log("aaaaaaaaaaaaaaaa")
+        return this.bienes.find(bien => bien.nombre === busca);
+      } else if (atributo === "material") {
+        return this.bienes.find(bien => bien.material === busca);
+      } else if (atributo === "peso") {
+        return this.bienes.find(bien => bien.peso === busca);
+      } else if (atributo === "valorCoronas") {
+        return this.bienes.find(bien => bien.valorCoronas === busca);
+      }
+    }
+    // si el nombre del vector es igual a mercaderes
+    if (nombre === "mercaderes") {
+      // si el atributo es nombre, busca por nombre, si es tipo, busca por tipo ...
+      if (atributo === "nombre") {
+        return this.mercaderes.find(mercader => mercader.nombre === busca);
+      } else if (atributo === "tipo") {
+        return this.mercaderes.find(mercader => mercader.tipo === busca);
+      } else if (atributo === "ubicacion") {
+        return this.mercaderes.find(mercader => mercader.ubicacion === busca);
+      }
+    }
+    // si el nombre del vector es igual a clientes
+    if (nombre === "clientes") {
+      // si el atributo es nombre, busca por nombre, si es raza, busca por raza ...
+      if (atributo === "nombre") {
+        return this.clientes.find(cliente => cliente.nombre === busca);
+      } else if (atributo === "raza") {
+        return this.clientes.find(cliente => cliente.raza === busca);
+      } else if (atributo === "ubicacion") {
+        return this.clientes.find(cliente => cliente.ubicacion === busca);
+      }
+    }
+    return undefined;
   }
-
-
-
- 
 
   /**
    * Metodo para ordenar los bienes por nombre
@@ -222,6 +259,8 @@ export class Inventario {
       }
     });
   }
+
+
   /**
    * Metodo para ordenar los bienes por valor
    * @param ascendente - booleano para ordenar de forma ascendente o descendente
@@ -280,33 +319,6 @@ export class Inventario {
       return true;
     }
     return false;
-  }
-
-  /**
-   * Metodo para buscar un bien por nombre
-   * @param nombre - nombre del bien a buscar
-   * @returns - bien encontrado
-   */
-  buscarBien(nombre: string): Bien | undefined {
-    return this.bienes.find(bien => bien.nombre.toLowerCase() === nombre.toLowerCase());
-  }
-
-  /**
-   * Metodo para buscar un mercader por nombre
-   * @param nombre - nombre del mercader a buscar
-   * @returns - mercader encontrado
-   */
-  buscarMercader(nombre: string): Mercader | undefined {
-    return this.mercaderes.find(mercader => mercader.nombre.toLowerCase() === nombre.toLowerCase());
-  }
-
-  /**
-   * Metodo para buscar un cliente por un nombre
-   * @param nombre - nombre del cliente a buscar
-   * @returns - cliente encontrado
-   */
-  buscarCliente(nombre: string): Cliente | undefined {
-    return this.clientes.find(cliente => cliente.nombre.toLowerCase() === nombre.toLowerCase());
   }
 
   /**

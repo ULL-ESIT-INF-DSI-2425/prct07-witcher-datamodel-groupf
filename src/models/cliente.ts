@@ -21,9 +21,13 @@ export class Cliente {
     private _raza: string,
     private _ubicacion: string,
   ) {
-    this.gestorTransacciones = new GestorTransacciones();
+  }
+
+  // funcion para guardar los datos en la base de datos
+  guardarDatos() {
     DatabaseManager.guardarDatos('Cliente', this);
   }
+
 
   // Getters
 

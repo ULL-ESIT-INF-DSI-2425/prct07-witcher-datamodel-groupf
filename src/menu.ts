@@ -52,8 +52,6 @@ async function menuPrincipal() {
   await menuPrincipal();
 }
 
-
-
 // Submenú para Añadir
 async function menuAñadir() {
   const respuesta = await inquirer.prompt([
@@ -226,9 +224,7 @@ async function menuBuscar() {
 
 
   // Submenú para buscar bienes
-
-
-  async function menuBuscarBien() {
+async function menuBuscarBien() {
   const respuesta = await inquirer.prompt([
     {
       type: "list",
@@ -245,13 +241,13 @@ async function menuBuscar() {
 
   switch (respuesta.criterio) {
     case "Por nombre":
-      await Funcionamiento.buscarBienPorNombre();
+      await Funcionamiento.buscar("bienes", "nombre");
       break;
     case "Por tipo":
-      await Funcionamiento.buscarBienPorDescripcion();
+      await Funcionamiento.buscar("bienes", "descripcion");
       break;
     case "Por ubicación":
-      await Funcionamiento.buscarBienPorMaterial();
+      await Funcionamiento.buscar("bienes", "material");
       break;
     case "Volver al menú anterior":
       return;
@@ -259,6 +255,7 @@ async function menuBuscar() {
 
   await menuBuscarBien();
 }
+
 // Submenú para buscar mercaderes
 async function menuBuscarMercader() {
     const respuesta = await inquirer.prompt([
@@ -277,13 +274,13 @@ async function menuBuscarMercader() {
   
     switch (respuesta.criterio) {
       case "Por nombre":
-        await Funcionamiento.buscarMercaderPorNombre();
+        await Funcionamiento.buscar("mercaderes", "nombre");
         break;
       case "Por región":
-        await Funcionamiento.buscarMercaderPorTipo();
+        await Funcionamiento.buscar("mercaderes", "tipo");
         break;
       case "Por ubicación":
-        await Funcionamiento.buscarMercaderPorUbicacion();
+        await Funcionamiento.buscar("mercaderes", "ubicacion");
         break;
       case "Volver al menú anterior":
         return;
@@ -312,13 +309,13 @@ async function menuBuscarCliente() {
   
     switch (respuesta.criterio) {
       case "Por nombre":
-        await Funcionamiento.buscarClientePorNombre();
+        await Funcionamiento.buscar("clientes", "nombre");
         break;
       case "Por raza":
-        await Funcionamiento.buscarClientePorRaza();
+        await Funcionamiento.buscar("clientes", "raza");
         break;
       case "Por ubicación":
-        await Funcionamiento.buscarClientePorUbicacion();
+        await Funcionamiento.buscar("clientes", "ubicacion");
         break;
       case "Volver al menú anterior":
         return;
@@ -345,9 +342,9 @@ async function menuOrdenar() {
     ]);
   
     switch (respuesta.opcion) {
-        case "Ordenar bienes por nombre":
+        case "Ordenar bienes por nombre": {
             // llamar a cargarBienesDesdeJSON
-            await Funcionamiento.cargarBienesDesdeJSON();
+            await Funcionamiento.cargarTodoDesdeJSON();
             // preguntar si se quiere ordenar de forma ascendente o descendente
             const respuesta = await inquirer.prompt([
                 {
@@ -368,10 +365,10 @@ async function menuOrdenar() {
                 await Funcionamiento.ordenarBienesPorNombre(false);
             }
             break;
+        }
         case "Ordenar bienes por valor":
-            // llamar a binesde esde el json
-            // llamar a ordenarBienesPorValor
-           
+            break;
+
         case "Volver al menú principal":
             return;
     }

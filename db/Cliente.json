@@ -6,12 +6,6 @@
     "_ubicacion": "5"
   },
   {
-    "_idUnico": "4",
-    "_nombre": "5",
-    "_raza": "5",
-    "_ubicacion": "5"
-  },
-  {
     "_idUnico": "2",
     "_nombre": "5",
     "_raza": "5",
@@ -21,48 +15,9 @@
     }
   },
   {
-    "_idUnico": "4",
-    "_nombre": "5",
-    "_raza": "5",
-    "_ubicacion": "5",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
-  },
-  {
-    "_idUnico": "2",
-    "_nombre": "5",
-    "_raza": "5",
-    "_ubicacion": "5",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
-  },
-  {
-    "_idUnico": "4",
-    "_nombre": "5",
-    "_raza": "5",
-    "_ubicacion": "5",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
-  },
-  {
-    "_idUnico": "2",
-    "_nombre": "5",
-    "_raza": "5",
-    "_ubicacion": "5",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
-  },
-  {
-    "_idUnico": "4",
-    "_nombre": "5",
-    "_raza": "5",
-    "_ubicacion": "5",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
+    "_idUnico": "23",
+    "_nombre": "2",
+    "_raza": "2",
+    "_ubicacion": "2"
   }
 ]

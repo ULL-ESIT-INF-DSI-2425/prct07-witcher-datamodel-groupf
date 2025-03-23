@@ -8,43 +8,27 @@
     "_valorCoronas": 3
   },
   {
-    "_idUnico": "1",
-    "_nombre": "c",
-    "_descripcion": "3",
-    "_material": "3",
-    "_peso": 3,
-    "_valorCoronas": 3
+    "_idUnico": "3",
+    "_nombre": "2",
+    "_descripcion": "2",
+    "_material": "2",
+    "_peso": 2,
+    "_valorCoronas": 2
   },
   {
-    "_idUnico": "2",
-    "_nombre": "a",
-    "_descripcion": "3",
-    "_material": "3",
-    "_peso": 3,
-    "_valorCoronas": 3
-  },
-  {
-    "_idUnico": "23",
-    "_nombre": "b",
-    "_descripcion": "3",
-    "_material": "3",
-    "_peso": 3,
-    "_valorCoronas": 3
+    "_idUnico": "4",
+    "_nombre": "2",
+    "_descripcion": "2",
+    "_material": "2",
+    "_peso": 2,
+    "_valorCoronas": 2
   },
   {
     "_idUnico": "1",
-    "_nombre": "c",
-    "_descripcion": "3",
-    "_material": "3",
-    "_peso": 3,
-    "_valorCoronas": 3
-  },
-  {
-    "_idUnico": "2",
-    "_nombre": "a",
-    "_descripcion": "3",
-    "_material": "3",
-    "_peso": 3,
-    "_valorCoronas": 3
+    "_nombre": "1",
+    "_descripcion": "1",
+    "_material": "1",
+    "_peso": 1,
+    "_valorCoronas": 1
   }
 ]
