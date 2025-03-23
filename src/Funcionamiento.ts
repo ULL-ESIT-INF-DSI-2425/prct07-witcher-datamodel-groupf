@@ -687,11 +687,9 @@ export async function realizarVenta() {
       return;
     }
 
-    // Eliminar el bien del array y actualizar el archivo JSON
     bienes.splice(indice, 1);
     await fs.writeFile("./db/Bien.json", JSON.stringify(bienes, null, 2), "utf-8");
 
-    // Confirmar la venta
     console.log(`Bien con ID "${idBien}" vendido con éxito al cliente con ID "${clienteId}".`);
   } catch (error) {
     console.error("Error al realizar la venta:", error.message);

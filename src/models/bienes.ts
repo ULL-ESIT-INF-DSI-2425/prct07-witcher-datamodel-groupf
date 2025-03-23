@@ -28,7 +28,7 @@ export class Bien {
     DatabaseManager.guardarDatos('Bien', this);
   }
 
-  // Getters
+ 
   /**
    * Getter que devuelve el idUnico de bienes
    * @returns - idUnico de bienes 

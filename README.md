@@ -10,6 +10,14 @@
   
 ➡️ En este repositorio desarollaremos el informe y los ejercicios de la Práctica 7, llamada "Gestión del inventario de la Posada del Lobo Blanco de la asignatura "Desarrollo de sistemas informáticos".
 
+## Compilacion
+
+```Bash
+npm run menu
+```
+(ejecuta en modo tsc watch)
+
+
 ## 📱 _Contactos_
 Icon | Icon ID | Enlaces | Integrante
 -------|--------|--------|----------
