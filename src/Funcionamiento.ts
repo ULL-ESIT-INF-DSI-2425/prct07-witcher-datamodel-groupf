@@ -1,303 +1,16 @@
 import inquirer from "inquirer";
 import fs from "fs/promises";
 import { Inventario } from "./Inventario.js";
-import { Bien } from "./bienes.js";
-import { Cliente } from "./cliente.js";
-import { Mercader } from "./mercaderes.js";
+import { Bien } from "./models/bienes.js";
+import { Cliente } from "./models/cliente.js";
+import { Mercader } from "./models/mercaderes.js";
 
-const inventario = new Inventario();
-
-// Menú principal
-async function menuPrincipal() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "opcion",
-      message: "¿Qué acción deseas realizar?",
-      choices: [
-        "Añadir",
-        "Eliminar",
-        "Modificar",
-        "Consultar",
-        "Buscar",
-        "Ordenar",
-        "Informes", 
-        "Salir"
-      ]
-    }
-  ]);
-
-  switch (respuesta.opcion) {
-    case "Añadir":
-      await menuAñadir();
-      break;
-    case "Eliminar":
-      await menuEliminar();
-      break;
-    case "Modificar":
-      await menuModificar();
-      break;
-    case "Consultar":
-      await menuConsultar();
-      break;
-    case "Buscar":
-      await menuBuscar();
-      break;
-    case "Ordenar":
-      await menuOrdenar();
-      break;
-    case "Informes": 
-      await menuInformes();
-      break;
-    case "Salir":
-      console.log("¡Hasta luego!");
-      return;
-  }
-
-  await menuPrincipal();
-}
-
-// Submenú para Añadir
-async function menuAñadir() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "opcion",
-      message: "¿Qué deseas añadir?",
-      choices: [
-        "Añadir un bien",
-        "Añadir un mercader",
-        "Añadir un cliente",
-        "Volver al menú principal"
-      ]
-    }
-  ]);
-
-  switch (respuesta.opcion) {
-    case "Añadir un bien":
-      await agregarBien();
-      break;
-    case "Añadir un mercader":
-      await agregarMercader();
-      break;
-    case "Añadir un cliente":
-      await agregarCliente();
-      break;
-    case "Volver al menú principal":
-      return;
-  }
-
-  await menuAñadir();
-}
-
-// Submenú para Eliminar
-async function menuEliminar() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "opcion",
-      message: "¿Qué deseas eliminar?",
-      choices: [
-        "Eliminar un bien",
-        "Eliminar un mercader",
-        "Eliminar un cliente",
-        "Volver al menú principal"
-      ]
-    }
-  ]);
-
-  switch (respuesta.opcion) {
-    case "Eliminar un bien":
-      await eliminarBien();
-      break;
-    case "Eliminar un mercader":
-      await eliminarMercader();
-      break;
-    case "Eliminar un cliente":
-      await eliminarCliente();
-      break;
-    case "Volver al menú principal":
-      return;
-  }
-
-  await menuEliminar();
-}
-
-// Submenú para Modificar
-async function menuModificar() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "opcion",
-      message: "¿Qué deseas modificar?",
-      choices: [
-        "Modificar un bien",
-        "Modificar un mercader",
-        "Modificar un cliente",
-        "Volver al menú principal"
-      ]
-    }
-  ]);
-
-  switch (respuesta.opcion) {
-    case "Modificar un bien":
-      await modificarBien();
-      break;
-    case "Modificar un mercader":
-      await modificarMercader();
-      break;
-    case "Modificar un cliente":
-      await modificarCliente();
-      break;
-    case "Volver al menú principal":
-      return;
-  }
-
-  await menuModificar();
-}
-
-// Submenú para Consultar
-async function menuConsultar() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "opcion",
-      message: "¿Qué deseas consultar?",
-      choices: [
-        "Consultar bienes",
-        "Consultar mercaderes",
-        "Consultar clientes",
-        "Volver al menú principal"
-      ]
-    }
-  ]);
-
-  switch (respuesta.opcion) {
-    case "Consultar bienes":
-      console.log(inventario.listarBienes());
-      break;
-    case "Consultar mercaderes":
-      console.log(inventario.listarMercaderes());
-      break;
-    case "Consultar clientes":
-      console.log(inventario.listarClientes());
-      break;
-    case "Volver al menú principal":
-      return;
-  }
-
-  await menuConsultar();
-}
-
-// Submenú para Buscar
-async function menuBuscar() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "opcion",
-      message: "¿Qué deseas buscar?",
-      choices: [
-        "Buscar bien por nombre",
-        "Buscar mercader por nombre",
-        "Buscar cliente por nombre",
-        "Volver al menú principal"
-      ]
-    }
-  ]);
-
-  switch (respuesta.opcion) {
-    case "Buscar bien por nombre":
-      await buscarBienPorNombre();
-      break;
-    case "Buscar mercader por nombre":
-      await buscarMercaderPorNombre();
-      break;
-    case "Buscar cliente por nombre":
-      await buscarClientePorNombre();
-      break;
-    case "Volver al menú principal":
-      return;
-  }
-
-  await menuBuscar();
-}
-
-// Submenú para Ordenar
-async function menuOrdenar() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "opcion",
-      message: "¿Qué deseas ordenar?",
-      choices: [
-        "Ordenar bienes por nombre",
-        "Ordenar bienes por valor",
-        "Volver al menú principal"
-      ]
-    }
-  ]);
-
-  switch (respuesta.opcion) {
-    case "Ordenar bienes por nombre":
-      const ordenNombre = await inquirer.prompt([
-        { type: "confirm", name: "ascendente", message: "¿Orden ascendente?" }
-      ]);
-      console.log(inventario.ordenarBienesPorNombre(ordenNombre.ascendente));
-      break;
-    case "Ordenar bienes por valor":
-      const ordenValor = await inquirer.prompt([
-        { type: "confirm", name: "ascendente", message: "¿Orden ascendente?" }
-      ]);
-      console.log(inventario.ordenarBienesPorValor(ordenValor.ascendente));
-      break;
-    case "Volver al menú principal":
-      return;
-  }
-
-  await menuOrdenar();
-}
-
-// Submenú para Informes
-async function menuInformes() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "opcion",
-      message: "¿Qué informe deseas generar?",
-      choices: [
-        "Estado del stock de un bien",
-        "Bienes más vendidos",
-        "Total de ingresos y gastos",
-        "Historial de transacciones de un cliente o mercader",
-        "Volver al menú principal"
-      ]
-    }
-  ]);
-
-  switch (respuesta.opcion) {
-    case "Estado del stock de un bien":
-      await estadoStock();
-      break;
-    case "Bienes más vendidos":
-      await bienesMasVendidos();
-      break;
-    case "Total de ingresos y gastos":
-      await totalIngresosGastos();
-      break;
-    case "Historial de transacciones de un cliente o mercader":
-      await historialTransacciones();
-      break;
-    case "Volver al menú principal":
-      return;
-  }
-
-  await menuInformes();
-}
+export const inventario = new Inventario();
 
 /**
  * Funcion para agregar un bien
  */
-async function agregarBien() {
+export async function agregarBien() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del bien:" },
     { type: "input", name: "nombre", message: "Nombre del bien:" },
@@ -327,23 +40,40 @@ async function agregarBien() {
       respuestas.material,
       respuestas.peso,
       respuestas.valor
-    );
+    ); 
 
     // Agregar el nuevo bien al arreglo
     bienes.push(nuevoBien);
 
     // Guardar los cambios en el archivo JSON
     await fs.writeFile("./db/Bien.json", JSON.stringify(bienes, null, 2), "utf-8");
+
+    // Agregar el nuevo bien al inventario en memoria
+    inventario.agregarBien(nuevoBien);
+
     console.log("Bien agregado con éxito.");
   } catch (error) {
     console.error("Error al agregar el bien:", error.message);
   }
 }
 
+
+export async function consultarBienes() {
+  const bienes = inventario.listarBienes();
+}
+
+export async function consultarMercaderes() {
+  const mercaderes = inventario.listarMercaderes();
+}
+
+export async function consultarClientes() {
+  const clientes = inventario.listarClientes();
+}
+
 /**
  * Funcion para agregar un mercader
  */
-async function agregarMercader() {
+export async function agregarMercader() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del mercader:" },
     { type: "input", name: "nombre", message: "Nombre del mercader:" },
@@ -379,7 +109,7 @@ async function agregarMercader() {
 /**
  * Funcion para agregar un cliente
  */
-async function agregarCliente() {
+export async function agregarCliente() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del cliente:" },
     { type: "input", name: "nombre", message: "Nombre del cliente:" },
@@ -421,7 +151,7 @@ async function agregarCliente() {
 /**
  * Funcion para eliminar un bien
  */
-async function eliminarBien() {
+export async function eliminarBien() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del bien a eliminar:" }
   ]);
@@ -453,7 +183,7 @@ async function eliminarBien() {
 /**
  * Funcion para eliminar un mercader
  */
-async function eliminarMercader() {
+export async function eliminarMercader() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del mercader a eliminar:" }
   ]);
@@ -485,7 +215,7 @@ async function eliminarMercader() {
 /**
  * Funcion para eliminar un cliente
  */
-async function eliminarCliente() {
+export async function eliminarCliente() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del cliente a eliminar:" }
   ]);
@@ -517,7 +247,7 @@ async function eliminarCliente() {
 /**
  * Funcion para modificar un bien
  */
-async function modificarBien() {
+export async function modificarBien() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del bien a modificar:" },
     { type: "input", name: "nombre", message: "Nuevo nombre del bien:" },
@@ -568,7 +298,7 @@ async function modificarBien() {
 /**
  * Funcion para modificar un mercader
  */
-async function modificarMercader() {
+export async function modificarMercader() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del mercader a modificar:" },
     { type: "input", name: "nombre", message: "Nuevo nombre del mercader:" },
@@ -615,7 +345,7 @@ async function modificarMercader() {
 /**
  * Funcion para modificar un cliente
  */
-async function modificarCliente() {
+export async function modificarCliente() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del cliente a modificar:" },
     { type: "input", name: "nombre", message: "Nuevo nombre del cliente:" },
@@ -661,28 +391,35 @@ async function modificarCliente() {
 /**
  * Funcion para buscar un bien por nombre
  */
-async function buscarBienPorNombre() {
+export async function buscarBienPorNombre() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del bien a buscar:" }
   ]);
 
   try {
-    // Leer el archivo JSON
+    // Leer el archivo JSON de bienes
     const data = await fs.readFile("./db/Bien.json", "utf-8");
-    const bienes: Bien[] = JSON.parse(data);
+    const bienes: any[] = JSON.parse(data);
 
-    // Buscar todos los bienes que coincidan con el nombre
-    const bienesEncontrados = bienes.filter(bien => 
-      bien.nombre && bien.nombre.toLowerCase().includes(respuestas.nombre.toLowerCase())
+    // Buscar los bienes directamente en los datos leídos del archivo, ignorando mayúsculas y minúsculas, y que sea estricto igual
+    const bienesEncontrados = bienes.filter(bien =>
+      bien._nombre && bien._nombre.toLowerCase() === respuestas.nombre.toLowerCase()
     );
 
     if (bienesEncontrados.length > 0) {
-      console.log("Bien(es) encontrado(s):");
+      console.log(`Se encontraron ${bienesEncontrados.length} bien(es) con el nombre "${respuestas.nombre}":`);
       bienesEncontrados.forEach((bien, index) => {
-        console.log(`${index + 1}.`, bien);
+        console.log(`${index + 1}.`);
+        console.log(`   ID: ${bien._idUnico}`);
+        console.log(`   Nombre: ${bien._nombre}`);
+        console.log(`   Descripción: ${bien._descripcion}`);
+        console.log(`   Material: ${bien._material}`);
+        console.log(`   Peso: ${bien._peso} kg`);
+        console.log(`   Valor: ${bien._valorCoronas} coronas`);
+        console.log("-----------------------------------");
       });
     } else {
-      console.log("No se encontró ningún bien con el nombre proporcionado.");
+      console.log(`No se encontró ningún bien con el nombre "${respuestas.nombre}".`);
     }
   } catch (error) {
     console.error("Error al leer el archivo JSON:", error.message);
@@ -692,98 +429,408 @@ async function buscarBienPorNombre() {
 /**
  * Funcion para buscar un mercader por nombre
  */
-async function buscarMercaderPorNombre() {
- 
-
+export async function buscarMercaderPorNombre() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del mercader a buscar:" }
   ]);
 
-  const mercader = inventario.buscarMercader(respuestas.nombre);
-  if (mercader) {
-    console.log("Mercader encontrado:", mercader);
-  } else {
-    console.log("No se encontró el mercader con el nombre proporcionado.");
+  try {
+    // Leer el archivo JSON de mercaderes
+    const data = await fs.readFile("./db/Mercader.json", "utf-8");
+    const mercaderes: any[] = JSON.parse(data);
+
+    // Buscar los mercaderes directamente en los datos leídos del archivo y que sea estricto igual
+    const mercaderesEncontrados = mercaderes.filter(mercader =>
+      mercader._nombre && mercader._nombre.toLowerCase() === respuestas.nombre.toLowerCase()
+    );
+    
+
+    if (mercaderesEncontrados.length > 0) {
+      console.log(`Se encontraron ${mercaderesEncontrados.length} mercader(es) con el nombre "${respuestas.nombre}":`);
+      mercaderesEncontrados.forEach((mercader, index) => {
+        console.log(`${index + 1}.`);
+        console.log(`   ID: ${mercader._id}`);
+        console.log(`   Nombre: ${mercader._nombre}`);
+        console.log(`   Ubicación: ${mercader._ubicacion}`);
+        console.log(`   Tipo: ${mercader._tipo}`);
+        console.log("-----------------------------------");
+      });
+    } else {
+      console.log(`No se encontró ningún mercader con el nombre "${respuestas.nombre}".`);
+    }
+  } catch (error) {
+    console.error("Error al leer el archivo JSON:", error.message);
   }
 }
 
 /**
  * Funcion para buscar un cliente por nombre
  */
-async function buscarClientePorNombre() {
- 
+export async function buscarClientePorNombre() {
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del cliente a buscar:" }
   ]);
 
-  const cliente = inventario.buscarCliente(respuestas.nombre);
-  if (cliente) {
-    console.log("Cliente encontrado:", cliente);
-  } else {
-    console.log("No se encontró el cliente con el nombre proporcionado.");
+  try {
+    // Leer el archivo JSON de clientes
+    const data = await fs.readFile("./db/Cliente.json", "utf-8");
+    const clientes: any[] = JSON.parse(data);
+
+    // Buscar los clientes directamente en los datos leídos del archivo
+    const clientesEncontrados = clientes.filter(cliente =>
+      cliente._nombre && cliente._nombre.toLowerCase() === respuestas.nombre.toLowerCase()
+    );
+
+    if (clientesEncontrados.length > 0) {
+      console.log(`Se encontraron ${clientesEncontrados.length} cliente(s) con el nombre "${respuestas.nombre}":`);
+      clientesEncontrados.forEach((cliente, index) => {
+        console.log(`${index + 1}.`);
+        console.log(`   ID: ${cliente._idUnico}`);
+        console.log(`   Nombre: ${cliente._nombre}`);
+        console.log(`   Raza: ${cliente._raza}`);
+        console.log(`   Ubicación: ${cliente._ubicacion}`);
+        console.log("-----------------------------------");
+      });
+    } else {
+      console.log(`No se encontró ningún cliente con el nombre "${respuestas.nombre}".`);
+    }
+  } catch (error) {
+    console.error("Error al leer el archivo JSON:", error.message);
   }
 }
 
 /**
- * Funcion para cargar los bienes desde un archivo JSON
+ * Funcion para buscar un bien por descripcion
  */
-async function cargarBienesDesdeJSON() {
+export async function buscarBienPorDescripcion() {
+  const respuestas = await inquirer.prompt([
+    { type: "input", name: "descripcion", message: "Descripcion del bien a buscar:" }
+  ]);
+
+  try {
+    // Leer el archivo JSON de bienes
+    const data = await fs.readFile("./db/Bien.json", "utf-8");
+    const bienes: any[] = JSON.parse(data);
+
+    // Buscar los bienes directamente en los datos leídos del archivo
+    const bienesEncontrados = bienes.filter(bien =>
+      bien._descripcion&& bien._descripcion.toLowerCase() === respuestas.descripcion.toLowerCase()
+    );
+
+
+    if (bienesEncontrados.length > 0) {
+      console.log(`Se encontraron ${bienesEncontrados.length} bien(es) con la denombrescripcion "${respuestas.descripcion}":`);
+      bienesEncontrados.forEach((bien, index) => {
+        console.log(`${index + 1}.`);
+        console.log(`   ID: ${bien._idUnico}`);
+        console.log(`   Nombre: ${bien._nombre}`);
+        console.log(`   Descripción: ${bien._descripcion}`);
+        console.log(`   Material: ${bien._material}`);
+        console.log(`   Peso: ${bien._peso} kg`);
+        console.log(`   Valor: ${bien._valorCoronas} coronas`);
+        console.log("-----------------------------------");
+      });
+    } else {
+      console.log(`No se encontró ningún bien con la descripcion "${respuestas.descripcion}".`);
+    }
+  } catch (error) {
+    console.error("Error al leer el archivo JSON:", error.message);
+  }
+}
+
+/**
+ * Funcion para buscar un bien por material
+ */
+export async function buscarBienPorMaterial() {
+  const respuestas = await inquirer.prompt([
+    { type: "input", name: "material", message: "Material del bien a buscar:" }
+  ]);
+
+  try {
+    // Leer el archivo JSON de bienes
+    const data = await fs.readFile("./db/Bien.json", "utf-8");
+    const bienes: any[] = JSON.parse(data);
+
+    // Buscar los bienes directamente en los datos leídos del archivo y que contenga el material y que sea estricto igual
+    const bienesEncontrados = bienes.filter(bien =>
+      bien._material && bien._material.toLowerCase() === respuestas.material.toLowerCase()
+    );
+
+    if (bienesEncontrados.length > 0) {
+      console.log(`Se encontraron ${bienesEncontrados.length} bien(es) con el material "${respuestas.material}":`);
+      bienesEncontrados.forEach((bien, index) => {
+        console.log(`${index + 1}.`);
+        console.log(`   ID: ${bien._idUnico}`);
+        console.log(`   Nombre: ${bien._nombre}`);
+        console.log(`   Descripción: ${bien._descripcion}`);
+        console.log(`   Material: ${bien._material}`);
+        console.log(`   Peso: ${bien._peso} kg`);
+        console.log(`   Valor: ${bien._valorCoronas} coronas`);
+        console.log("-----------------------------------");
+      });
+    } else {
+      console.log(`No se encontró ningún bien con el material "${respuestas.material}".`);
+    }
+  } catch (error) {
+    console.error("Error al leer el archivo JSON:", error.message);
+  }
+}
+
+
+/**
+ * Funcion para buscar un mercader por tipo
+ */
+export async function buscarMercaderPorTipo() {
+  const respuestas = await inquirer.prompt([
+    { type: "input", name: "tipo", message: "Tipo del mercader a buscar:" }
+  ]);
+
+  try {
+    // Leer el archivo JSON de mercaderes
+    const data = await fs.readFile("./db/Mercader.json", "utf-8");
+    const mercaderes: any[] = JSON.parse(data);
+
+    // Buscar los mercaderes directamente en los datos leídos del archivo y que contenga el tipo y que sea estricto igual
+    const mercaderesEncontrados = mercaderes.filter(mercader =>
+      mercader._tipo && mercader._tipo.toLowerCase() === respuestas.tipo.toLowerCase()
+    );
+    
+    if (mercaderesEncontrados.length > 0) {
+      console.log(`Se encontraron ${mercaderesEncontrados.length} mercader(es) con el tipo "${respuestas.tipo}":`);
+      mercaderesEncontrados.forEach((mercader, index) => {
+        console.log(`${index + 1}.`);
+        console.log(`   ID: ${mercader._id}`);
+        console.log(`   Nombre: ${mercader._nombre}`);
+        console.log(`   Ubicación: ${mercader._ubicacion}`);
+        console.log(`   Tipo: ${mercader._tipo}`);
+        console.log("-----------------------------------");
+      });
+    } else {
+      console.log(`No se encontró ningún mercader con el tipo "${respuestas.tipo}".`);
+    }
+  } catch (error) {
+    console.error("Error al leer el archivo JSON:", error.message);
+  }
+}
+
+/**
+ * Funcion para buscar un mercader por ubicacion
+ */
+export async function buscarMercaderPorUbicacion() {
+  const respuestas = await inquirer.prompt([
+    { type: "input", name: "ubicacion", message: "Ubicacion del mercader a buscar:" }
+  ]);
+
+  try {
+    // Leer el archivo JSON de mercaderes
+    const data = await fs.readFile("./db/Mercader.json", "utf-8");
+    const mercaderes: any[] = JSON.parse(data);
+
+    // Buscar los mercaderes directamente en los datos leídos del archivo y que contenga la ubicacion y que sea estricto igual
+    const mercaderesEncontrados = mercaderes.filter(mercader =>
+      mercader._ubicacion && mercader._ubicacion.toLowerCase() === respuestas.ubicacion.toLowerCase()
+    );
+
+    if (mercaderesEncontrados.length > 0) {
+      console.log(`Se encontraron ${mercaderesEncontrados.length} mercader(es) con la ubicacion "${respuestas.ubicacion}":`);
+      mercaderesEncontrados.forEach((mercader, index) => {
+        console.log(`${index + 1}.`);
+        console.log(`   ID: ${mercader._id}`);
+        console.log(`   Nombre: ${mercader._nombre}`);
+        console.log(`   Ubicación: ${mercader._ubicacion}`);
+        console.log(`   Tipo: ${mercader._tipo}`);
+        console.log("-----------------------------------");
+      });
+    } else {
+      console.log(`No se encontró ningún mercader con la ubicacion "${respuestas.ubicacion}".`);
+    }
+  } catch (error) {
+    console.error("Error al leer el archivo JSON:", error.message);
+  }
+}
+
+/**
+ * Funcion para buscar un cliente por nombre
+ */
+export async function buscarClientePorRaza() {
+  const respuestas = await inquirer.prompt([
+    { type: "input", name: "raza", message: "Raza del cliente a buscar:" }
+  ]);
+
+  try {
+    // Leer el archivo JSON de clientes
+    const data = await fs.readFile("./db/Cliente.json", "utf-8");
+    const clientes: any[] = JSON.parse(data);
+
+    // Buscar los clientes directamente en los datos leídos del archivo y que contenga la raza y que sea estricto igual
+    const clientesEncontrados = clientes.filter(cliente =>
+      cliente._raza && cliente._raza.toLowerCase() === respuestas.raza.toLowerCase()
+    );
+    
+    if (clientesEncontrados.length > 0) {
+      console.log(`Se encontraron ${clientesEncontrados.length} cliente(s) con la raza "${respuestas.raza}":`);
+      clientesEncontrados.forEach((cliente, index) => {
+        console.log(`${index + 1}.`);
+        console.log(`   ID: ${cliente._idUnico}`);
+        console.log(`   Nombre: ${cliente._nombre}`);
+        console.log(`   Raza: ${cliente._raza}`);
+        console.log(`   Ubicación: ${cliente._ubicacion}`);
+        console.log("-----------------------------------");
+      });
+    } else {
+      console.log(`No se encontró ningún cliente con la raza "${respuestas.raza}".`);
+    }
+  } catch (error) {
+    console.error("Error al leer el archivo JSON:", error.message);
+  }
+}
+
+/**
+ * Funcion para buscar un cliente por nombre
+ */
+export async function buscarClientePorUbicacion() {
+  const respuestas = await inquirer.prompt([
+    { type: "input", name: "ubicacion", message: "Ubicacion del cliente a buscar:" }
+  ]);
+
+  try {
+    // Leer el archivo JSON de clientes
+    const data = await fs.readFile("./db/Cliente.json", "utf-8");
+    const clientes: any[] = JSON.parse(data);
+
+    // Buscar los clientes directamente en los datos leídos del archivo y que contenga la ubicacion y que sea estricto igual
+    const clientesEncontrados = clientes.filter(cliente =>
+      cliente._ubicacion && cliente._ubicacion.toLowerCase() === respuestas.ubicacion.toLowerCase()
+    );
+    
+    if (clientesEncontrados.length > 0) {
+      console.log(`Se encontraron ${clientesEncontrados.length} cliente(s) con la ubicacion "${respuestas.ubicacion}":`);
+      clientesEncontrados.forEach((cliente, index) => {
+        console.log(`${index + 1}.`);
+        console.log(`   ID: ${cliente._idUnico}`);
+        console.log(`   Nombre: ${cliente._nombre}`);
+        console.log(`   Raza: ${cliente._raza}`);
+        console.log(`   Ubicación: ${cliente._ubicacion}`);
+        console.log("-----------------------------------");
+      });
+    } else {
+      console.log(`No se encontró ningún cliente con la ubicacion "${respuestas.ubicacion}".`);
+    }
+  } catch (error) {
+    console.error("Error al leer el archivo JSON:", error.message);
+  }
+}
+
+
+/**
+ * Funcion para cargar los bienes desde un archivo JSON, y los agrege como clases al inventario
+ */
+export async function cargarBienesDesdeJSON() {
   try {
     const data = await fs.readFile("./db/Bien.json", "utf-8");
     const bienes = JSON.parse(data);
 
-    // Limpiar el inventario antes de cargar nuevos bienes
-    inventario.limpiarBienes();
-
-    // Agregar los bienes al inventario
+    // Agregar los bienes al inventario solo si no están duplicados
     bienes.forEach((bien: any) => {
-      inventario.agregarBien(bien);
+      const existe = inventario.listarBienes().some(b => b.idUnico === bien._idUnico);
+      if (!existe) {
+        inventario.agregarBien(
+          new Bien(bien._idUnico, bien._nombre, bien._descripcion, bien._material, bien._peso, bien._valorCoronas)
+        );
+      }
     });
 
-    console.log("Bienes cargados desde el archivo JSON:", inventario.listarBienes());
+    console.log("Bienes cargados desde el archivo JSON.");
   } catch (error) {
     console.error("Error al cargar los bienes desde el archivo JSON:", error.message);
   }
 }
 
-/**
- * Funcion para cargar los mercaderes desde un archivo JSON
- */
-async function cargarMercaderesDesdeJSON() {
-  try {
-    const data = await fs.readFile("./db/Mercader.json", "utf-8");
-    const mercaderes = JSON.parse(data);
-    mercaderes.forEach((mercader: any) => {
-      inventario.agregarMercader(
-        new Mercader(mercader._id, mercader._nombre, mercader._tipo, mercader._ubicacion)
-      );
-    });
-    console.log("Mercaderes cargados desde el archivo JSON.");
-  } catch (error) {
-    console.error("Error al cargar los mercaderes desde el archivo JSON:", error.message);
-  }
-}
-
-/**
- * Funcion para cargar los clientes desde un archivo JSON
- */
-async function cargarClientesDesdeJSON() {
+// fucnion para cargar los clientes desde un archivo JSON, y los agrege como clases al inventario
+export async function cargarClientesDesdeJSON() {
   try {
     const data = await fs.readFile("./db/Cliente.json", "utf-8");
     const clientes = JSON.parse(data);
+
+    // Limpiar los clientes existentes en el inventario antes de cargar nuevos
+    inventario.limpiarClientes();
+
+    // Agregar los clientes al inventario
     clientes.forEach((cliente: any) => {
       inventario.agregarCliente(
         new Cliente(cliente._idUnico, cliente._nombre, cliente._raza, cliente._ubicacion)
       );
     });
+
     console.log("Clientes cargados desde el archivo JSON.");
   } catch (error) {
     console.error("Error al cargar los clientes desde el archivo JSON:", error.message);
   }
 }
 
+/**
+ * Funcion para cargar los mercaderes desde un archivo JSON, y los agrege como clases al inventario
+ */
+export async function cargarMercaderesDesdeJSON() {
+  try {
+    const data = await fs.readFile("./db/Mercader.json", "utf-8");
+    const mercaderes = JSON.parse(data);
+
+    // Limpiar los mercaderes existentes en el inventario antes de cargar nuevos
+    inventario.limpiarMercaderes();
+
+    // Agregar los mercaderes al inventario
+    mercaderes.forEach((mercader: any) => {
+      inventario.agregarMercader(
+        new Mercader(mercader._id, mercader._nombre, mercader._tipo, mercader._ubicacion)
+      );
+    });
+
+    console.log("Mercaderes cargados desde el archivo JSON.");
+  } catch (error) {
+    console.error("Error al cargar los mercaderes desde el archivo JSON:", error.message);
+  }
+}
+
+
+// fucnion para cargar todo desde un archivo JSON, y los agrege como clases al inventario, y debe llamar a las funciones de cargarBienesDesdeJSON, cargarClientesDesdeJSON y cargarMercaderesDesdeJSON
+export async function cargarTodoDesdeJSON() {
+  try {
+    await cargarBienesDesdeJSON();
+    await cargarClientesDesdeJSON();
+    await cargarMercaderesDesdeJSON();
+    console.log("Todo cargado desde el archivo JSON.");
+  } catch (error) {
+    console.error("Error al cargar todo desde el archivo JSON:", error.message);
+  }
+}
+
+
+// funcion para ordenar los bienes por nombre
+export async function ordenarBienesPorNombre(opt: boolean) {
+  inventario.ordenarBienesPorNombre(opt);
+  console.log("Bienes ordenados por nombre.");
+  // Mostrar los bienes ordenados
+  let bienes = inventario.listarBienes();
+  if (bienes.length > 0) { 
+    console.log(`Se encontraron ${bienes.length} bienes:`);
+    bienes.forEach((bien, index) => {
+      console.log(`${index + 1}.`);
+      console.log(`   ID: ${bien.idUnico}`);
+      console.log(`   Nombre: ${bien.nombre}`);
+      console.log(`   Descripción: ${bien.descripcion}`);
+      console.log(`   Material: ${bien.material}`);
+      console.log(`   Peso: ${bien.peso} kg`);
+      console.log(`   Valor: ${bien.valorCoronas} coronas`);
+      console.log("-----------------------------------");
+    });
+  } else {
+    console.log(`No se encontró ningún bien.`);
+  }
+}
+
 // Funciones para generar informes
-async function estadoStock() {
+export async function estadoStock() {
   const respuesta = await inquirer.prompt([
     {
       type: "list",
@@ -812,7 +859,7 @@ async function estadoStock() {
   }
 }
 
-async function bienesMasVendidos() {
+export async function bienesMasVendidos() {
   const bienesVendidos = inventario.gestorTransaccioness.obtenerBienesMasVendidos();
   console.log("Bienes más vendidos:");
   bienesVendidos.forEach((bien, index) => {
@@ -820,7 +867,7 @@ async function bienesMasVendidos() {
   });
 }
 
-async function totalIngresosGastos() {
+export async function totalIngresosGastos() {
   const ingresos = inventario.gestorTransaccioness.obtenerTotalIngresos();
   const gastos = inventario.gestorTransaccioness.obtenerTotalGastos();
   console.log(`Total de ingresos por ventas: ${ingresos} coronas`);
@@ -828,7 +875,7 @@ async function totalIngresosGastos() {
   console.log(`Balance total: ${ingresos - gastos} coronas`);
 }
 
-async function historialTransacciones() {
+export async function historialTransacciones() {
   const respuesta = await inquirer.prompt([
     {
       type: "list",
@@ -853,8 +900,3 @@ async function historialTransacciones() {
     });
   }
 }
-
-
-
-
-menuPrincipal();

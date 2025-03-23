@@ -1,74 +1,50 @@
 [
   {
+    "_idUnico": "23",
+    "_nombre": "b",
+    "_descripcion": "3",
+    "_material": "3",
+    "_peso": 3,
+    "_valorCoronas": 3
+  },
+  {
+    "_idUnico": "1",
+    "_nombre": "c",
+    "_descripcion": "3",
+    "_material": "3",
+    "_peso": 3,
+    "_valorCoronas": 3
+  },
+  {
     "_idUnico": "2",
     "_nombre": "a",
-    "_descripcion": "Espada utilizada para combatir monstruos.",
-    "_material": "Plata",
-    "_peso": 2.5,
-    "_valorCoronas": 200
+    "_descripcion": "3",
+    "_material": "3",
+    "_peso": 3,
+    "_valorCoronas": 3
   },
   {
-    "_idUnico": "3",
-    "_nombre": "Poción curativa",
-    "_descripcion": "Poción que restaura la salud.",
-    "_material": "Hierbas",
-    "_peso": 0.1,
-    "_valorCoronas": 50
+    "_idUnico": "23",
+    "_nombre": "b",
+    "_descripcion": "3",
+    "_material": "3",
+    "_peso": 3,
+    "_valorCoronas": 3
   },
   {
-    "_idUnico": "4",
-    "_nombre": "Amuleto",
-    "_descripcion": "Amuleto básico que vibra cerca de monstruos.",
-    "_material": "Plata",
-    "_peso": 0.3,
-    "_valorCoronas": 150
+    "_idUnico": "1",
+    "_nombre": "c",
+    "_descripcion": "3",
+    "_material": "3",
+    "_peso": 3,
+    "_valorCoronas": 3
   },
   {
-    "_idUnico": "5",
-    "_nombre": "Bombas",
-    "_descripcion": "Bombas explosivas útiles en combate.",
-    "_material": "Pólvora",
-    "_peso": 0.7,
-    "_valorCoronas": 80
-  },
-  {
-    "_idUnico": "6",
-    "_nombre": "Runa mágica",
-    "_descripcion": "Runa que mejora las armas o armaduras.",
-    "_material": "Cristal",
-    "_peso": 0.2,
-    "_valorCoronas": 120
-  },
-  {
-    "_idUnico": "7",
-    "_nombre": "Trofeo",
-    "_descripcion": "Trofeo obtenido al cazar un monstruo.",
-    "_material": "Hueso",
-    "_peso": 4,
-    "_valorCoronas": 300
-  },
-  {
-    "_idUnico": "8",
-    "_nombre": "Cuero",
-    "_descripcion": "Material utilizado para fabricar armaduras.",
-    "_material": "Cuero",
-    "_peso": 1.5,
-    "_valorCoronas": 60
-  },
-  {
-    "_idUnico": "9",
-    "_nombre": "Libro mágico",
-    "_descripcion": "Libro con conocimientos antiguos.",
-    "_material": "Papel",
-    "_peso": 0.5,
-    "_valorCoronas": 250
-  },
-  {
-    "_idUnico": "10",
-    "_nombre": "Elixir",
-    "_descripcion": "Elixir que mejora temporalmente las habilidades.",
-    "_material": "Hierbas",
-    "_peso": 0.3,
-    "_valorCoronas": 90
+    "_idUnico": "2",
+    "_nombre": "a",
+    "_descripcion": "3",
+    "_material": "3",
+    "_peso": 3,
+    "_valorCoronas": 3
   }
 ]

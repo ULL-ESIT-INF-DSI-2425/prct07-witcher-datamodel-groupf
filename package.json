@@ -5,7 +5,7 @@
   "main": "pokemon.js",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
-    "menu": "tsc-watch --onSuccess \"node dist/Funcionamiento.js\"",
+    "menu": "tsc-watch --onSuccess \"node dist/menu.js\"",
     "doc": "typedoc",
     "test": "vitest run",
     "coverage": "vitest run --coverage --coverage.include src/"

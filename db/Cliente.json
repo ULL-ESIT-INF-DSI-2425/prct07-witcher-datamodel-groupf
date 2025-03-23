@@ -1,26 +1,68 @@
 [
   {
     "_idUnico": "2",
-    "_nombre": "3",
-    "_raza": "32",
-    "_ubicacion": "34",
+    "_nombre": "5",
+    "_raza": "5",
+    "_ubicacion": "5"
+  },
+  {
+    "_idUnico": "4",
+    "_nombre": "5",
+    "_raza": "5",
+    "_ubicacion": "5"
+  },
+  {
+    "_idUnico": "2",
+    "_nombre": "5",
+    "_raza": "5",
+    "_ubicacion": "5",
+    "gestorTransacciones": {
+      "transacciones": []
+    }
+  },
+  {
+    "_idUnico": "4",
+    "_nombre": "5",
+    "_raza": "5",
+    "_ubicacion": "5",
     "gestorTransacciones": {
       "transacciones": []
     }
   },
   {
     "_idUnico": "2",
-    "_nombre": "3",
-    "_raza": "32",
-    "_ubicacion": "4",
+    "_nombre": "5",
+    "_raza": "5",
+    "_ubicacion": "5",
     "gestorTransacciones": {
       "transacciones": []
     }
   },
   {
-    "_idUnico": "5",
-    "_nombre": "1",
-    "_raza": "1",
-    "_ubicacion": "1"
+    "_idUnico": "4",
+    "_nombre": "5",
+    "_raza": "5",
+    "_ubicacion": "5",
+    "gestorTransacciones": {
+      "transacciones": []
+    }
+  },
+  {
+    "_idUnico": "2",
+    "_nombre": "5",
+    "_raza": "5",
+    "_ubicacion": "5",
+    "gestorTransacciones": {
+      "transacciones": []
+    }
+  },
+  {
+    "_idUnico": "4",
+    "_nombre": "5",
+    "_raza": "5",
+    "_ubicacion": "5",
+    "gestorTransacciones": {
+      "transacciones": []
+    }
   }
 ]

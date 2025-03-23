@@ -1,4 +1,4 @@
-import { DatabaseManager } from "./dataBase.js";
+import { DatabaseManager } from "../dataBase.js";
 /**
  * Clase que representa los bien
  */

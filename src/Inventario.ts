@@ -1,6 +1,6 @@
-import { Mercader } from "./mercaderes.js";
-import { Cliente } from "./cliente.js";
-import { Bien } from "./bienes.js";
+import { Mercader } from "./models/mercaderes.js";
+import { Cliente } from "./models/cliente.js";
+import { Bien } from "./models/bienes.js";
 import { GestorTransacciones } from "./gestion-transicion.js";
 import { Transaccion } from "./trancision.js";
 
@@ -189,15 +189,25 @@ export class Inventario {
     return this.mercaderes;
   }
 
+    limpiarMercaderes() {
+    this.mercaderes = [];
+  }
+
+  limpiarClientes() {
+    this.clientes = [];
+  }
   /**
    * Metodo para listar los clientes
-   * @returns - clientes
+   * @returns - clientesinventario
    */
   listarClientes(): Cliente[] {
     return this.clientes;
   }
 
-  
+
+
+ 
+
   /**
    * Metodo para ordenar los bienes por nombre
    * @param ascendente - booleano para ordenar de forma ascendente o descendente
@@ -212,7 +222,6 @@ export class Inventario {
       }
     });
   }
-
   /**
    * Metodo para ordenar los bienes por valor
    * @param ascendente - booleano para ordenar de forma ascendente o descendente

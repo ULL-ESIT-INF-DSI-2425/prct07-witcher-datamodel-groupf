@@ -4,7 +4,7 @@ import { Transaccion } from "./trancision.js";
  * Clase que gestiona las transacciones
  */
 export class GestorTransacciones {
-  private transacciones: Transaccion[] = [];
+  private transacciones: Transaccion[] = []; 
 
   /**
    * Método para registrar una venta
