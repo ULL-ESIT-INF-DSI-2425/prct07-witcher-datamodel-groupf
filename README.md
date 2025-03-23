@@ -1,5 +1,5 @@
 # [DSI] Práctica 7: Gestión del inventario de la Posada del Lobo Blanco
-## PÁGINA: [WEB DOCUMENTACIÓN]()
+## PÁGINA: [WEB DOCUMENTACIÓN](https://ull-esit-inf-dsi-2425.github.io/prct07-witcher-datamodel-groupf/)
 * Universidad de La Laguna
 * Grado en Ingeniería Informática
 * Curso: Tercero de Ingeniería Informática
