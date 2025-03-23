@@ -1,50 +1,162 @@
 [
   {
+    "_idUnico": "1",
+    "_nombre": "Espada de Plata",
+    "_descripcion": "Una espada fina hecha de plata",
+    "_material": "Plata",
+    "_peso": 3,
+    "_valorCoronas": 150
+  },
+  {
+    "_idUnico": "2",
+    "_nombre": "Anillo de Rubí",
+    "_descripcion": "Un anillo con un rubí incrustado",
+    "_material": "Oro",
+    "_peso": 1,
+    "_valorCoronas": 300
+  },
+  {
     "_idUnico": "3",
-    "_nombre": "a",
-    "_descripcion": "2",
-    "_material": "2",
-    "_peso": 2,
-    "_valorCoronas": 2
+    "_nombre": "Cota de Malla",
+    "_descripcion": "Armadura ligera de malla de acero",
+    "_material": "Acero",
+    "_peso": 10,
+    "_valorCoronas": 500
   },
   {
     "_idUnico": "4",
-    "_nombre": "c",
-    "_descripcion": "2",
-    "_material": "2",
-    "_peso": 2,
-    "_valorCoronas": 2
+    "_nombre": "Pergamino Antiguo",
+    "_descripcion": "Un pergamino con escrituras mágicas",
+    "_material": "Papiro",
+    "_peso": 1,
+    "_valorCoronas": 75
   },
   {
-    "_idUnico": "1",
-    "_nombre": "d",
-    "_descripcion": "2",
-    "_material": "2",
-    "_peso": 2,
-    "_valorCoronas": 2
+    "_idUnico": "5",
+    "_nombre": "Botella de Elixir",
+    "_descripcion": "Un elixir curativo de origen desconocido",
+    "_material": "Vidrio",
+    "_peso": 1,
+    "_valorCoronas": 200
   },
   {
-    "_idUnico": "888",
-    "_nombre": "h",
-    "_descripcion": "5",
-    "_material": "5",
+    "_idUnico": "6",
+    "_nombre": "Escudo de Roble",
+    "_descripcion": "Escudo resistente hecho de madera de roble",
+    "_material": "Madera",
+    "_peso": 6,
+    "_valorCoronas": 180
+  },
+  {
+    "_idUnico": "7",
+    "_nombre": "Collar de Perlas",
+    "_descripcion": "Un hermoso collar con perlas blancas",
+    "_material": "Perlas",
+    "_peso": 1,
+    "_valorCoronas": 350
+  },
+  {
+    "_idUnico": "8",
+    "_nombre": "Daga de Acero",
+    "_descripcion": "Daga afilada perfecta para el combate",
+    "_material": "Acero",
+    "_peso": 2,
+    "_valorCoronas": 120
+  },
+  {
+    "_idUnico": "9",
+    "_nombre": "Cáliz Dorado",
+    "_descripcion": "Un cáliz decorado con oro y piedras preciosas",
+    "_material": "Oro",
+    "_peso": 2,
+    "_valorCoronas": 600
+  },
+  {
+    "_idUnico": "10",
+    "_nombre": "Piedra Mística",
+    "_descripcion": "Una piedra con extraños símbolos mágicos",
+    "_material": "Mineral",
+    "_peso": 3,
+    "_valorCoronas": 500
+  },
+  {
+    "_idUnico": "11",
+    "_nombre": "Amuleto de Protección",
+    "_descripcion": "Un amuleto encantado contra maleficios",
+    "_material": "Plata",
+    "_peso": 1,
+    "_valorCoronas": 275
+  },
+  {
+    "_idUnico": "12",
+    "_nombre": "Botas de Cuero",
+    "_descripcion": "Botas resistentes hechas de cuero curtido",
+    "_material": "Cuero",
+    "_peso": 3,
+    "_valorCoronas": 90
+  },
+  {
+    "_idUnico": "13",
+    "_nombre": "Poción de Invisibilidad",
+    "_descripcion": "Una poción rara que otorga invisibilidad temporal",
+    "_material": "Vidrio",
+    "_peso": 1,
+    "_valorCoronas": 450
+  },
+  {
+    "_idUnico": "14",
+    "_nombre": "Casco de Hierro",
+    "_descripcion": "Casco protector hecho de hierro sólido",
+    "_material": "Hierro",
     "_peso": 5,
-    "_valorCoronas": 5
+    "_valorCoronas": 250
   },
   {
-    "_idUnico": "66666",
-    "_nombre": "2sfg",
-    "_descripcion": "dfg",
-    "_material": "sdfgdfhwdh",
-    "_peso": 2,
-    "_valorCoronas": 2
+    "_idUnico": "15",
+    "_nombre": "Libro de Conjuros",
+    "_descripcion": "Un libro antiguo con poderosos conjuros",
+    "_material": "Pergamino",
+    "_peso": 4,
+    "_valorCoronas": 550
   },
   {
-    "_idUnico": "23423462",
-    "_nombre": "sdfgd",
-    "_descripcion": "fdsdfgdfg",
-    "_material": "sdfgsfdg",
+    "_idUnico": "16",
+    "_nombre": "Guantes de Seda",
+    "_descripcion": "Guantes elegantes de seda real",
+    "_material": "Seda",
+    "_peso": 1,
+    "_valorCoronas": 125
+  },
+  {
+    "_idUnico": "17",
+    "_nombre": "Lámpara de Aladino",
+    "_descripcion": "Una lámpara con un brillo misterioso",
+    "_material": "Bronce",
+    "_peso": 3,
+    "_valorCoronas": 800
+  },
+  {
+    "_idUnico": "18",
+    "_nombre": "Lanza de Cazador",
+    "_descripcion": "Lanza afilada ideal para cazar bestias",
+    "_material": "Madera y acero",
+    "_peso": 5,
+    "_valorCoronas": 275
+  },
+  {
+    "_idUnico": "19",
+    "_nombre": "Mapa del Tesoro",
+    "_descripcion": "Un mapa antiguo con ubicaciones secretas",
+    "_material": "Papel",
+    "_peso": 1,
+    "_valorCoronas": 350
+  },
+  {
+    "_idUnico": "20",
+    "_nombre": "Corona Real",
+    "_descripcion": "Una corona de oro con gemas preciosas",
+    "_material": "Oro",
     "_peso": 2,
-    "_valorCoronas": 2
+    "_valorCoronas": 1000
   }
 ]

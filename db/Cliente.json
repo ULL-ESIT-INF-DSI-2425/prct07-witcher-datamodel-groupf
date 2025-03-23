@@ -1,29 +1,62 @@
 [
   {
-    "_idUnico": "2",
-    "_nombre": "5",
-    "_raza": "5",
-    "_ubicacion": "5"
+    "_idUnico": "1",
+    "_nombre": "Priscilla",
+    "_raza": "Humano",
+    "_ubicacion": "Novigrado"
   },
   {
     "_idUnico": "2",
-    "_nombre": "5",
-    "_raza": "5",
-    "_ubicacion": "5",
-    "gestorTransacciones": {
-      "transacciones": []
-    }
+    "_nombre": "Zoltan Chivay",
+    "_raza": "Enano",
+    "_ubicacion": "Novigrado"
   },
   {
-    "_idUnico": "23",
-    "_nombre": "2",
-    "_raza": "2",
-    "_ubicacion": "2"
+    "_idUnico": "3",
+    "_nombre": "Yennefer de Vengerberg",
+    "_raza": "Humano",
+    "_ubicacion": "Kaer Trolde, Islas Skellige"
   },
   {
-    "_idUnico": "2",
-    "_nombre": "2",
-    "_raza": "2",
-    "_ubicacion": "2"
+    "_idUnico": "4",
+    "_nombre": "Ciri",
+    "_raza": "Humano",
+    "_ubicacion": "Velen"
+  },
+  {
+    "_idUnico": "5",
+    "_nombre": "Dijkstra",
+    "_raza": "Humano",
+    "_ubicacion": "Novigrado"
+  },
+  {
+    "_idUnico": "6",
+    "_nombre": "Eredin",
+    "_raza": "Aen Elle (Elfo de otro mundo)",
+    "_ubicacion": "Tir ná Lia"
+  },
+  {
+    "_idUnico": "7",
+    "_nombre": "Avallac'h",
+    "_raza": "Aen Saevherne (Elfo Sabio)",
+    "_ubicacion": "Islas Skellige"
+  },
+  {
+    "_idUnico": "8",
+    "_nombre": "Vesemir",
+    "_raza": "Brujo",
+    "_ubicacion": "Kaer Morhen"
+  },
+  {
+    "_idUnico": "9",
+    "_nombre": "Gaunter O'Dimm",
+    "_raza": "Desconocido",
+    "_ubicacion": "Velen"
+  },
+  {
+    "_idUnico": "10",
+    "_nombre": "Letho de Guleta",
+    "_raza": "Brujo (Escuela de la Víbora)",
+    "_ubicacion": "Huerto Blanco"
   }
 ]

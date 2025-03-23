@@ -1,8 +1,62 @@
 [
   {
     "_id": "1",
-    "_nombre": "1",
-    "_tipo": "1",
-    "_ubicacion": "1"
+    "_nombre": "Hattori",
+    "_tipo": "Maestro espadero",
+    "_ubicacion": "Novigrado"
+  },
+  {
+    "_id": "2",
+    "_nombre": "Fergus Graem",
+    "_tipo": "Herrero",
+    "_ubicacion": "Velen"
+  },
+  {
+    "_id": "3",
+    "_nombre": "Éibhear Hattori",
+    "_tipo": "Herrero enano",
+    "_ubicacion": "Novigrado"
+  },
+  {
+    "_id": "4",
+    "_nombre": "Joachim de Wet",
+    "_tipo": "Alquimista",
+    "_ubicacion": "Oxenfurt"
+  },
+  {
+    "_id": "5",
+    "_nombre": "Gremist",
+    "_tipo": "Druida alquimista",
+    "_ubicacion": "Islas Skellige"
+  },
+  {
+    "_id": "6",
+    "_nombre": "Marcus Hodgson",
+    "_tipo": "Comerciante de libros",
+    "_ubicacion": "Novigrado"
+  },
+  {
+    "_id": "7",
+    "_nombre": "Ibrahim Savi",
+    "_tipo": "Mercader general",
+    "_ubicacion": "Puerto de Novigrado"
+  },
+  {
+    "_id": "8",
+    "_nombre": "Keira Metz",
+    "_tipo": "Hechicera y comerciante de pociones",
+    "_ubicacion": "Velen"
+  },
+  {
+    "_id": "9",
+    "_nombre": "Elsa",
+    "_tipo": "Posadera",
+    "_ubicacion": "Huerto Blanco"
+  },
+  {
+    "_id": "10",
+    "_nombre": "Dandelion",
+    "_tipo": "Tabernero y poeta",
+    "_ubicacion": "Rosemary and Thyme, Novigrado"
   }
 ]
