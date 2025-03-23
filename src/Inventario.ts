@@ -1,8 +1,6 @@
 import { Mercader } from "./models/mercaderes.js";
 import { Cliente } from "./models/cliente.js";
 import { Bien } from "./models/bienes.js";
-import { GestorTransacciones } from "./gestion-transicion.js";
-import { Transaccion } from "./trancision.js";
 
 /**
  * Clase que representa el inventario
@@ -11,36 +9,50 @@ export class Inventario {
   private bienes: Bien[] = [];
   private mercaderes: Mercader[] = [];
   private clientes: Cliente[] = [];
-  private gestorTransacciones: GestorTransacciones;
-
-  // Getters
-  get gestorTransaccioness(): GestorTransacciones {
-    return this.gestorTransacciones;
-  }
-  
-  limpiarBienes() {
-    this.bienes = [];
-  }
-
-
-  buscarBienPorId(id: string): Bien | undefined {
-    return this.bienes.find(bien => bien.idUnico === id);
-  }
-
-  buscarMercaderPorId(id: string): Mercader | undefined {
-    return this.mercaderes.find(mercader => mercader.idUnico === id);
-  }
-
-  buscarClientePorId(id: string): Cliente | undefined {
-    return this.clientes.find(cliente => cliente.idUnico === id);
-  }
+  private compras: [string, number][] = [];
+  private ventas: [string, string][] = [];
 
   /**
    * Constructor de la clase Inventario
    */
   constructor() {
-    this.gestorTransacciones = new GestorTransacciones();
   }
+
+  /**
+   * Metodo para limpiar el vector de bienes
+   */
+  limpiarBienes() {
+    this.bienes = [];
+  }
+
+
+  /**
+   * Metodo para buscar un bien por su nombre
+   * @param nombre - nombre del bien a buscar
+   * @returns - bien encontrado
+   */
+  buscarBienPorId(id: string): Bien | undefined {
+    return this.bienes.find(bien => bien.idUnico === id);
+  }
+
+  /**
+   * Metodo para buscar un mercader por su id
+   * @param id - id del mercader a buscar
+   * @returns - mercader encontrado
+   */
+  buscarMercaderPorId(id: string): Mercader | undefined {
+    return this.mercaderes.find(mercader => mercader.idUnico === id);
+  }
+
+  /**
+   * Metodo para buscar un cliente por su id
+   * @param id - id del cliente a buscar
+   * @returns - cliente encontrado
+   */
+  buscarClientePorId(id: string): Cliente | undefined {
+    return this.clientes.find(cliente => cliente.idUnico === id);
+  }
+
 
   /**
    * Método para agregar un bien al inventario
@@ -108,74 +120,12 @@ export class Inventario {
     return false;
   }
 
-  // /**
-  //  * Método para registrar una venta
-  //  * @param clienteId - id del cliente
-  //  * @param bienes - bienes a vender
-  //  * @param cantidadCoronas - cantidad de coronas
-  //  * @param detalles - detalles de la venta
-  //  * @returns true si se registró la venta, false en caso contrario
-  //  */
-  // registrarVenta(clienteId: string, bienes: string[], cantidadCoronas: number): boolean {
-  //   const cliente = this.clientes.find(cliente => cliente.idUnico === clienteId);
-  //   if (!cliente) {
-  //     console.log("Cliente no encontrado.");
-  //     return false;
-  //   }
-  
-  //   const bienesNoEncontrados = bienes.filter(bien => !this.bienes.some(b => b.nombre === bien));
-  //   if (bienesNoEncontrados.length > 0) {
-  //     console.log(`Los siguientes bienes no existen en el inventario: ${bienesNoEncontrados.join(", ")}`);
-  //     return false;
-  //   }
-  
-  //   this.gestorTransacciones.registrarVenta(new Date(), bienes, cantidadCoronas);
-  //   return true;
-  // }
-
-
-
-  // /**
-  //  * Método para registrar una devolución
-  //  * @param actorId - id del actor
-  //  * @param bienes - bienes a devolver
-  //  * @param cantidadCoronas - cantidad de coronas
-  //  * @param detalles - detalles de la devolución
-  //  * @param tipo - tipo de actor
-  //  * @returns true si se registró la devolución, false en caso contrario
-  //  */
-  // registrarDevolucion(actorId: string, bienes: string[], cantidadCoronas: number, detalles: string, tipo: "cliente" | "mercader"): boolean {
-  //   if (tipo === "cliente") {
-  //     const cliente = this.clientes.find(cliente => cliente.idUnico === actorId);
-  //     if (cliente) {
-  //       this.gestorTransacciones.registrarDevolucion(new Date(), bienes, cantidadCoronas);
-  //       return true;
-  //     }
-  //   } else if (tipo === "mercader") {
-  //     const mercader = this.mercaderes.find(mercader => mercader.idUnico === actorId);
-  //     if (mercader) {
-  //       this.gestorTransacciones.registrarDevolucion(new Date(), bienes, cantidadCoronas);
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-
-  
-  /**
-   * Método para obtener el historial de transacciones
-   * @returns historial de transacciones
-   */
-  obtenerHistorialTransacciones(): Transaccion[] {
-    return this.gestorTransacciones.obtenerHistorial();
-  }
 
   /**
    * Metodo para listar los bienes
    * @returns - bienes
    */
-  listarBienes(){
-    // muestra todo el vector de bienes
+  listarBienes() {
     console.log(this.bienes);
   }
 
@@ -183,8 +133,7 @@ export class Inventario {
    * Metodo para listar los mercaderes
    * @returns - mercaderes
    */
-  listarMercaderes(){
-    // muestra todo el vector de mercaderes
+  listarMercaderes() {
     console.log(this.mercaderes);
   }
 
@@ -192,26 +141,36 @@ export class Inventario {
    * Metodo para listar los clientes
    * @returns - clientesinventario
    */
-  listarClientes(): Cliente[] {
-    return this.clientes;
+  listarClientes() {
+    console.log(this.clientes);
   }
 
-    limpiarMercaderes() {
+  /**
+   * Metodo para limpiar los mercaderes
+   *
+   */
+  limpiarMercaderes() {
     this.mercaderes = [];
   }
 
+  /**
+   * Metodo para limpiar los clientes
+   */
   limpiarClientes() {
     this.clientes = [];
   }
 
-  // funcion para buscar, se le pasa por parametros el nombre del vector que desea buscar y el nombre del atributo, y busca segun   el nombre que se le pase
+  /**
+   * Metodo para buscar un bien por su nombre
+   * @param nombre - nombre del bien a buscar
+   * @param atributo - atributo por el cual se va a buscar
+   * @param busca - valor a buscar
+   * @returns - bien encontrado o undefined si no se encuentra
+   */
   buscar(nombre: string, atributo: string, busca: string | number): Bien[] | Mercader[] | Cliente[] | undefined {
     console.log(atributo)
-    // si el nombre del vector es igual a bienes
     if (nombre === "bienes") {
-      // si el atributo es nombre, busca por nombre, si es material, busca por material ...
       if (atributo === "nombre") {
-        console.log("aaaaaaaaaaaaaaaa")
         return this.bienes.filter(bien => bien.nombre === busca);
       } else if (atributo === "material") {
         return this.bienes.filter(bien => bien.material === busca);
@@ -224,9 +183,9 @@ export class Inventario {
         return this.bienes.filter(bien => bien.descripcion === busca);
       }
     }
-    // si el nombre del vector es igual a mercaderes
+    
     if (nombre === "mercaderes") {
-      // si el atributo es nombre, busca por nombre, si es tipo, busca por tipo ...
+      
       if (atributo === "nombre") {
         return this.mercaderes.filter(mercader => mercader.nombre === busca);
       } else if (atributo === "tipo") {
@@ -235,9 +194,9 @@ export class Inventario {
         return this.mercaderes.filter(mercader => mercader.ubicacion === busca);
       }
     }
-    // si el nombre del vector es igual a clientes
+ 
     if (nombre === "clientes") {
-      // si el atributo es nombre, busca por nombre, si es raza, busca por raza ...
+      
       if (atributo === "nombre") {
         return this.clientes.filter(cliente => cliente.nombre === busca);
       } else if (atributo === "raza") {
@@ -343,10 +302,54 @@ export class Inventario {
     return this.bienes.filter(bien => bien.material.toLowerCase() === material.toLowerCase()).length;
   }
 
-  // funcion para saber el tamaño del vector de bienes
+  /**
+   * Método para obtener el stock de bienes
+   * @returns - cantidad de bienes en el inventario
+   */
   stock_size(): number {
     return this.bienes.length;
   }
 
-  
+  /**
+   * Método para comprar un bien
+   * @param id - id del mercader
+   * @param cantidadCoronas - cantidad de coronas a pagar
+   * @returns - true si se realizó la compra, false en caso contrario
+   */
+  comprar(id: string, cantidadCoronas: number): boolean {
+    const mercader = this.mercaderes.find(mercader => mercader.idUnico === id);
+    if (!mercader) {
+      console.log("Mercader no encontrado.");
+      return false;
+    }
+    this.compras.push([id, cantidadCoronas]);
+    return true;
+  }
+
+  /**
+   * Método para obtener el último bien añadido 
+   * @returns - último bien añadido
+   */
+  getUltimoBien(): Bien {
+    return this.bienes[this.bienes.length - 1];
+  }
+
+  /**
+   * Metodo para vender un bien
+   * @param id - id del cliente
+   * @param id_bien - id del bien a vender
+   * @returns - true si se realizó la venta, false en caso contrario
+   */
+  vender(id: string, id_bien: string): boolean {
+    const cliente = this.clientes.find(cliente => cliente.idUnico === id);
+    if (!cliente) {
+      console.log("Cliente no encontrado.");
+      return false;
+    }  
+
+
+    this.ventas.push([id, id_bien]);
+    this.bienes = this.bienes.filter(bien => bien.idUnico !== id_bien); 
+    return true;
+  }
 }

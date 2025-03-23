@@ -1,5 +1,3 @@
-// dataBase.ts
-
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -11,15 +9,11 @@ export class DatabaseManager {
 
   static guardarDatos(tipo: string, datos: any) {
     const filePath = path.join(this.dbPath, `${tipo}.json`);
-
-    // Nos aseguramos de que la carpeta db exista antes de guardar los datos
     if (!fs.existsSync(this.dbPath)) {
       fs.mkdirSync(this.dbPath, { recursive: true });
     }
-
-    // Verificamos si el archivo existe y si no, creamos el archivo vacío
     if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, JSON.stringify([])); // Crea un archivo vacío si no existe
+      fs.writeFileSync(filePath, JSON.stringify([])); 
     }
 
     let contenido: any[] = [];

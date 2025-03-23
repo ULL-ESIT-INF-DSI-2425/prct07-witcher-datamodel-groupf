@@ -2,8 +2,9 @@ import inquirer from "inquirer";
 import * as Funcionamiento from "./Funcionamiento.js";
 
 
-
-// Menú principal   
+/**
+ * Función que muestra el menú principal y llama a las funciones correspondientes
+ */
 async function menuPrincipal() {
   const respuesta = await inquirer.prompt([
     {
@@ -18,7 +19,6 @@ async function menuPrincipal() {
         "Buscar",
         "Ordenar",
         "Informes",
-    //    "Hacer transicion",
         "Salir"
       ]
     }
@@ -46,9 +46,6 @@ async function menuPrincipal() {
     case "Informes":
       await menuInformes();
       break;
-      // case: "Hacer trancisiones":
-      // await menuComprasVentas();
-     // break;
     case "Salir":
       console.log("¡Hasta luego!");
       return;
@@ -57,7 +54,9 @@ async function menuPrincipal() {
   await menuPrincipal();
 }
 
-// Submenú para Añadir
+/**
+ * Función que muestra el submenú de añadir y llama a las funciones correspondientes
+ */
 async function menuAñadir() {
   const respuesta = await inquirer.prompt([
     {
@@ -90,7 +89,9 @@ async function menuAñadir() {
   await menuAñadir();
 }
 
-// Submenú para Eliminar
+/**
+ * Función que muestra el submenú de eliminar y llama a las funciones correspondientes
+ */
 async function menuEliminar() {
   const respuesta = await inquirer.prompt([
     {
@@ -123,7 +124,9 @@ async function menuEliminar() {
   await menuEliminar();
 }
 
-// Submenú para Modificar
+/**
+ * Función que muestra el submenú de modificar y llama a las funciones correspondientes
+ */
 async function menuModificar() {
   const respuesta = await inquirer.prompt([
     {
@@ -156,7 +159,9 @@ async function menuModificar() {
   await menuModificar();
 }
 
-// Submenú para Consultar
+/**
+ * Función que muestra el submenú de consultar y llama a las funciones correspondientes
+ */
 async function menuConsultar() {
   const respuesta = await inquirer.prompt([
     {
@@ -194,7 +199,9 @@ async function menuConsultar() {
 
 }
 
-// Submenú para Buscar
+/**
+ * Función que muestra el submenú de buscar y llama a las funciones correspondientes
+ */
 async function menuBuscar() {
     const respuesta = await inquirer.prompt([
       {
@@ -228,8 +235,9 @@ async function menuBuscar() {
   }
   
 
-
-  // Submenú para buscar bienes
+/**
+ * Función que muestra el submenú de buscar bienes y llama a las funciones correspondientes
+ */
 async function menuBuscarBien() {
   const respuesta = await inquirer.prompt([
     {
@@ -262,7 +270,9 @@ async function menuBuscarBien() {
   await menuBuscarBien();
 }
 
-// Submenú para buscar mercaderes
+/**
+ * Función que muestra el submenú de buscar mercaderes y llama a las funciones correspondientes
+ */
 async function menuBuscarMercader() {
     const respuesta = await inquirer.prompt([
       {
@@ -296,8 +306,9 @@ async function menuBuscarMercader() {
   }
   
 
-  
-// Submenú para buscar clientes
+/**
+ * Función que muestra el submenú de buscar clientes y llama a las funciones correspondientes
+ */
 async function menuBuscarCliente() {
     const respuesta = await inquirer.prompt([
       {
@@ -330,9 +341,9 @@ async function menuBuscarCliente() {
     await menuBuscarCliente();
   }
 
-
-// Submenú para Ordenar
-// Submenú para Ordenar
+/**
+ * Función que muestra el submenú de ordenar y llama a las funciones correspondientes
+ */
 async function menuOrdenar() {
     const respuesta = await inquirer.prompt([
       {
@@ -349,9 +360,9 @@ async function menuOrdenar() {
   
     switch (respuesta.opcion) {
         case "Ordenar bienes por nombre": {
-            // llamar a cargarBienesDesdeJSON
+          
             await Funcionamiento.cargarTodoDesdeJSON();
-            // preguntar si se quiere ordenar de forma ascendente o descendente
+          
             const respuesta = await inquirer.prompt([
                 {
                   type: "list",
@@ -364,7 +375,7 @@ async function menuOrdenar() {
                 }
               ]);
 
-            // llamar a ordenarBienesPorNombre
+            
             if (respuesta.opcion === "Ascendente") {
                 await Funcionamiento.ordenarBienesPorNombre(true);
             } else {
@@ -373,9 +384,9 @@ async function menuOrdenar() {
             break;
         }
         case "Ordenar bienes por valor": {
-          // llamar a cargarBienesDesdeJSON
+         
           await Funcionamiento.cargarTodoDesdeJSON();
-          // preguntar si se quiere ordenar de forma ascendente o descendente
+        
           const respuesta = await inquirer.prompt([
               {
                 type: "list",
@@ -388,7 +399,7 @@ async function menuOrdenar() {
               }
             ]);
 
-          // llamar a ordenarBienesPorNombre
+         
           if (respuesta.opcion === "Ascendente") {
               await Funcionamiento.ordenarBienesPorValor(true);
           } else {
@@ -405,12 +416,11 @@ async function menuOrdenar() {
   }
 
 
-  
 
 
-
-
-// Submenú para Informes
+/**
+ * Función que muestra el submenú de informes y llama a las funciones correspondientes
+ */
 async function menuInformes() {
   const respuesta = await inquirer.prompt([
     {
@@ -422,6 +432,7 @@ async function menuInformes() {
         "Bienes más vendidos",
         "Total de ingresos y gastos",
         "Historial de transacciones de un cliente o mercader",
+        "Hacer transiciones",
         "Volver al menú principal",
         ""
       ]
@@ -432,14 +443,8 @@ async function menuInformes() {
     case "Cantidad del stock":
       await Funcionamiento.stockDeUnBien();
       break;
-    case "Bienes más vendidos":
-      await Funcionamiento.bienesMasVendidos();
-      break;
-    case "Total de ingresos y gastos":
-      await Funcionamiento.totalIngresosGastos();
-      break;
-    case "Historial de transacciones de un cliente o mercader":
-      await Funcionamiento.historialTransacciones();
+    case "Hacer transiciones":
+      await menuComprasVentas();
       break;
     case "Volver al menú principal":
       return;
@@ -448,63 +453,40 @@ async function menuInformes() {
   await menuInformes();
 }
 
-// // Menú principal de compras y ventas
-// async function menuComprasVentas() {
-//   const respuesta = await inquirer.prompt([
-//     {
-//       type: "list",
-//       name: "accion",
-//       message: "¿Qué acción deseas realizar?",
-//       choices: [
-//         "Comprar",
-//         "Vender",
-//         "Volver al menú principal"
-//       ]
-//     }
-//   ]);
+/**
+ * Función que muestra el menú de compras y ventas y llama a las funciones correspondientes
+ */
+async function menuComprasVentas() {
+  const respuesta = await inquirer.prompt([
+    {
+      type: "list",
+      name: "accion",
+      message: "¿Qué acción deseas realizar?",
+      choices: [
+        "Comprar",
+        "Vender",
+        "Volver al menú principal"
+      ]
+    }
+  ]);
 
-//   switch (respuesta.accion) {
-//     case "Comprar":
-//       await menuComprar();
-//       break;
-//     case "Vender":
-//       await menuVender();
-//       break;
-//     case "Volver al menú principal":
-//       return;
-//   }
+  switch (respuesta.accion) {
+    case "Comprar":
+      await Funcionamiento.realizarCompra();
+      break;
+    case "Vender":
+      await Funcionamiento.realizarVenta();
+      break;
+    case "Historial de transiciones":
+      break;
+    case "Volver al menú principal":
+      return;
+  }
 
-//   await menuComprasVentas();
-// }
-
-// // Submenú para Comprar
-// async function menuComprar() {
-//   const respuesta = await inquirer.prompt([
-//     {
-//       type: "input",
-//       name: "comprador",
-//       message: "¿Quién está comprando?"
-//     }
-//   ]);
-
-//   console.log(`El comprador es: ${respuesta.comprador}`);
-//   await Funcionamiento.realizarCompra(respuesta.comprador);
-//   await menuComprasVentas();
-// }
-
-// // Submenú para Vender
-// async function menuVender() {
-//   const respuesta = await inquirer.prompt([
-//     {
-//       type: "input",
-//       name: "vendedor",
-//       message: "¿Quién está vendiendo?"
-//     }
-//   ]);
-
-//   console.log(`El vendedor es: ${respuesta.vendedor}`);
-//   await Funcionamiento.realizarVenta(respuesta.vendedor);
-//   await menuComprasVentas();
-// }
+  await menuComprasVentas();
+}
 
 menuPrincipal();
+
+
+

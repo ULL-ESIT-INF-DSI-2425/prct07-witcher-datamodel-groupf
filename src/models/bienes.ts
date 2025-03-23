@@ -19,10 +19,11 @@ export class Bien {
       private _material: string,
       private _peso: number,
       private _valorCoronas: number
-  ) {
-  }
+  ) {}
 
-  // funcion para guardar los datos en la base de datos
+  /**
+   * Funcion que guarda los datos de los bienes en la base de datos
+   */
   guardarDatos() {
     DatabaseManager.guardarDatos('Bien', this);
   }
@@ -76,7 +77,7 @@ n     */
     return this._valorCoronas;
   }
 
-
+  // Setters
   /**
    * Setter que establece el idUnico del bien
    * @param idUnico - idUnico del bien

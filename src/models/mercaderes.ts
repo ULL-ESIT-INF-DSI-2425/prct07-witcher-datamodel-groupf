@@ -1,13 +1,9 @@
 import { DatabaseManager } from "../dataBase.js";
-import { GestorTransacciones } from "../gestion-transicion.js";
-import { Transaccion } from "../trancision.js";
 
 /**
  * Clase que representa a cada Mercader
  */
 export class Mercader {
-  private gestorTransacciones: GestorTransacciones;
-
   /**
    * Constructor de la clase Mercader
    * @param _id - ID único del mercader
@@ -20,16 +16,16 @@ export class Mercader {
     private _nombre: string,
     private _tipo: string,
     private _ubicacion: string,
-  ) {
-  }
+  ) {}
 
-  // funcion para guardar los datos en la base de datos
+  /**
+   * Función que guarda los datos del mercader en la base de datos
+   */
   guardarDatos() {
     DatabaseManager.guardarDatos('Mercader', this);
   }
 
   // Getters
-
   /**
    * Getter que devuelve el ID único del mercader
    * @returns - ID único del mercader
@@ -63,7 +59,6 @@ export class Mercader {
   }
 
   // Setters
-
   /**
    * Setter que modifica el ID único del mercader
    * @param id - ID único del mercader
@@ -95,48 +90,4 @@ export class Mercader {
   set ubicacion(ubicacion: string) {
     this._ubicacion = ubicacion;
   }
-
-  // Métodos para interactuar con el gestor de transacciones
-
-  // /**
-  //  * Registra una venta realizada por el mercader
-  //  * @param fecha - Fecha de la venta
-  //  * @param bienes - Bienes intercambiados
-  //  * @param cantidadCoronas - Cantidad de coronas involucrada
-  //  * @param detalles - Detalles adicionales
-  //  */
-  // registrarVenta(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
-  //   this.gestorTransacciones.registrarVenta(fecha, bienes, cantidadCoronas, detalles);
-  // }
-
-  
-  // /**
-  //  * Registra una compra realizada por el mercader
-  //  * @param fecha - Fecha de la compra
-  //  * @param bienes - Bienes intercambiados
-  //  * @param cantidadCoronas - Cantidad de coronas involucrada
-  //  * @param detalles - Detalles adicionales
-  //  */
-  // registrarCompra(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
-  //   this.gestorTransacciones.registrarCompra(fecha, bienes, cantidadCoronas, detalles);
-  // }
-
-  // /**
-  //  * Registra una devolución realizada por el mercader
-  //  * @param fecha - Fecha de la devolución
-  //  * @param bienes - Bienes devueltos
-  //  * @param cantidadCoronas - Cantidad de coronas involucrada
-  //  * @param detalles - Detalles adicionales
-  //  */
-  // registrarDevolucion(fecha: Date, bienes: string[], cantidadCoronas: number, detalles: string): void {
-  //   this.gestorTransacciones.registrarDevolucion(fecha, bienes, cantidadCoronas, detalles);
-  // }
-
-  // /**
-  //  * Obtiene el historial de transacciones del mercader
-  //  * @returns - Historial de transacciones
-  //  */
-  // obtenerHistorialTransacciones(): Transaccion[] {
-  //   return this.gestorTransacciones.obtenerHistorial();
-  // }
 }

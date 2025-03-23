@@ -8,7 +8,7 @@ import { Mercader } from "./models/mercaderes.js";
 export const inventario = new Inventario();
 
 /**
- * Funcion para agregar un bien
+ * Función para mostrar el menú principal.
  */
 export async function agregarBien() {
   const respuestas = await inquirer.prompt([
@@ -21,16 +21,16 @@ export async function agregarBien() {
   ]);
 
   try {
-    // cargar todo desde el archivo JSON
+    
     await cargarTodoDesdeJSON();
 
-    // comprueba que no exista un bien con el mismo id
+    
     const existe = inventario.buscarBienPorId(respuestas.id);
     if (existe) {
       console.log("Ya existe un bien con el mismo ID. No se puede agregar.");
       return;
     }
-    // crea una clase bien con los datos y añadesela al inventario
+    
     const nuevoBien = new Bien(
       respuestas.id,
       respuestas.nombre,
@@ -60,17 +60,17 @@ export async function agregarMercader() {
   ]);
 
   try {
-    // cargar todo desde el archivo JSON
+  
     await cargarTodoDesdeJSON();
 
-    // Verificar si ya existe un mercader con el mismo ID
+    
     const existe = inventario.buscarMercaderPorId(respuestas.id.trim());
     if (existe) {
       console.log("Ya existe un mercader con el mismo ID. No se puede agregar.");
       return;
     }
 
-    // Crear un nuevo mercader y agregarlo al inventario
+    
     const nuevoMercader = new Mercader(
       respuestas.id.trim(),
       respuestas.nombre,
@@ -98,17 +98,17 @@ export async function agregarCliente() {
   ]);
 
   try {
-    // cargar todo desde el archivo JSON
+    
     await cargarTodoDesdeJSON();
 
-    // Verificar si ya existe un cliente con el mismo ID
+   
     const existe = inventario.buscarClientePorId(respuestas.id.trim());
     if (existe) {
       console.log("Ya existe un cliente con el mismo ID. No se puede agregar.");
       return;
     }
 
-    // Crear un nuevo cliente y agregarlo al inventario
+   
     const nuevoCliente = new Cliente(
       respuestas.id.trim(),
       respuestas.nombre,
@@ -133,11 +133,11 @@ export async function eliminarBien() {
   ]);
 
   try {
-    // Leer el archivo JSON de bienes
+   
     const data = await fs.readFile("./db/Bien.json", "utf-8");
     let bienes: any[] = JSON.parse(data);
 
-    // Buscar el índice del bien a eliminar
+   
     const indice = bienes.findIndex(bien => bien._idUnico === respuestas.id.trim());
 
     if (indice === -1) {
@@ -145,13 +145,13 @@ export async function eliminarBien() {
       return;
     }
 
-    // Eliminar el bien del arreglo
+    
     bienes.splice(indice, 1);
 
-    // borralo de la clase inventario
+    
     inventario.eliminarBien(respuestas.id.trim());
 
-    // Guardar los cambios en el archivo JSON
+    
     await fs.writeFile("./db/Bien.json", JSON.stringify(bienes, null, 2), "utf-8");
     console.log("Bien eliminado con éxito.");
   } catch (error) {
@@ -168,11 +168,11 @@ export async function eliminarMercader() {
   ]);
 
   try {
-    // Leer el archivo JSON de mercaderes
+    
     const data = await fs.readFile("./db/Mercader.json", "utf-8");
     let mercaderes: any[] = JSON.parse(data);
 
-    // Buscar el índice del mercader a eliminar
+   
     const indice = mercaderes.findIndex(mercader => mercader._id === respuestas.id.trim());
 
     if (indice === -1) {
@@ -180,13 +180,13 @@ export async function eliminarMercader() {
       return;
     }
 
-    // Eliminar el mercader del arreglo
+    
     mercaderes.splice(indice, 1);
 
-    // borralo de la clase inventario
+    
     inventario.eliminarMercader(respuestas.id.trim());
 
-    // Guardar los cambios en el archivo JSON
+    
     await fs.writeFile("./db/Mercader.json", JSON.stringify(mercaderes, null, 2), "utf-8");
     console.log("Mercader eliminado con éxito.");
   } catch (error) {
@@ -203,11 +203,10 @@ export async function eliminarCliente() {
   ]);
 
   try {
-    // Leer el archivo JSON de clientes
+    
     const data = await fs.readFile("./db/Cliente.json", "utf-8");
     let clientes: any[] = JSON.parse(data);
 
-    // Buscar el índice del cliente a eliminar
     const indice = clientes.findIndex(cliente => cliente._idUnico === respuestas.id.trim());
 
     if (indice === -1) {
@@ -215,13 +214,13 @@ export async function eliminarCliente() {
       return;
     }
 
-    // Eliminar el cliente del arreglo
+   
     clientes.splice(indice, 1);
 
-    // borralo de la clase inventario
+    
     inventario.eliminarCliente(respuestas.id.trim());
 
-    // Guardar los cambios en el archivo JSON
+  
     await fs.writeFile("./db/Cliente.json", JSON.stringify(clientes, null, 2), "utf-8");
     console.log("Cliente eliminado con éxito.");
   } catch (error) {
@@ -230,7 +229,7 @@ export async function eliminarCliente() {
 }
 
 export async function consultarBienes() {
-  // muestra todos los bienes
+ 
   inventario.listarBienes();
 }
 
@@ -247,7 +246,7 @@ export async function consultarClientes() {
  * Funcion para modificar un bien
  */
 export async function modificarBien() {
-  // debe primero pedir el id del bien a modificar, y luego borrarlo y agregar uno nuevo
+ 
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del bien a modificar:" },
     { type: "input", name: "nombre", message: "Nuevo nombre del bien:" },
@@ -257,11 +256,11 @@ export async function modificarBien() {
     { type: "number", name: "valor", message: "Nuevo valor del bien en coronas:" }
   ]);
   try {
-    // Leer el archivo JSON de bienes
+   
     const data = await fs.readFile("./db/Bien.json", "utf-8");
     let bienes: any[] = JSON.parse(data);
 
-    // Buscar el índice del bien a eliminar
+   
     const indice = bienes.findIndex(bien => bien._idUnico === respuestas.id.trim());
 
     if (indice === -1) {
@@ -269,17 +268,17 @@ export async function modificarBien() {
       return;
     }
 
-    // Eliminar el bien del arreglo
+   
     bienes.splice(indice, 1);
 
-    // borralo de la clase inventario
+    
     inventario.eliminarBien(respuestas.id.trim());
 
-    // Guardar los cambios en el archivo JSON
+ 
     await fs.writeFile("./db/Bien.json", JSON.stringify(bienes, null, 2), "utf-8");
     console.log("Bien eliminado con éxito.");
 
-    // Crear un nuevo bien con los datos proporcionados
+
     const nuevoBien = new Bien(
       respuestas.id,
       respuestas.nombre,
@@ -289,7 +288,7 @@ export async function modificarBien() {
       respuestas.valor
     );
 
-    // Agregar el nuevo bien al inventario
+    
     nuevoBien.guardarDatos();
     inventario.agregarBien(nuevoBien);
     console.log("Bien modificado con éxito.");
@@ -302,7 +301,7 @@ export async function modificarBien() {
  * Función para modificar un mercader
  */
 export async function modificarMercader() {
-  // Solicita los datos del mercader a modificar
+ 
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del mercader a modificar:" },
     { type: "input", name: "nombre", message: "Nuevo nombre del mercader:" },
@@ -311,11 +310,11 @@ export async function modificarMercader() {
   ]);
 
   try {
-    // Leer el archivo JSON de bienes
+    
     const data = await fs.readFile("./db/Mercader.json", "utf-8");
     let mercaderes: any[] = JSON.parse(data);
 
-    // Buscar el índice del bien a eliminar
+    
     const indice = mercaderes.findIndex(mercader => mercader._idUnico === respuestas.id.trim());
 
     if (indice === -1) {
@@ -323,17 +322,17 @@ export async function modificarMercader() {
       return;
     }
 
-    // Eliminar el bien del arreglo
+   
     mercaderes.splice(indice, 1);
 
-    // borralo de la clase inventario
+   
     inventario.eliminarBien(respuestas.id.trim());
 
-    // Guardar los cambios en el archivo JSON
+   
     await fs.writeFile("./db/Mercader.json", JSON.stringify(mercaderes, null, 2), "utf-8");
     console.log("Mercader eliminado con éxito.");
 
-    // Crear un nuevo bien con los datos proporcionados
+   
     const nuevoMercader = new Mercader(
       respuestas.id,
       respuestas.nombre,
@@ -352,7 +351,7 @@ export async function modificarMercader() {
  * Función para modificar un cliente
  */
 export async function modificarCliente() {
-  // Solicita los datos del cliente a modificar
+ 
   const respuestas = await inquirer.prompt([
     { type: "input", name: "id", message: "ID del cliente a modificar:" },
     { type: "input", name: "nombre", message: "Nuevo nombre del cliente:" },
@@ -361,11 +360,11 @@ export async function modificarCliente() {
   ]);
 
   try {
-    // Leer el archivo JSON de bienes
+   
     const data = await fs.readFile("./db/Cliente.json", "utf-8");
     let clientes: any[] = JSON.parse(data);
 
-    // Buscar el índice del bien a eliminar
+   
     const indice = clientes.findIndex(cliente => cliente._idUnico === respuestas.id.trim());
 
     if (indice === -1) {
@@ -373,17 +372,16 @@ export async function modificarCliente() {
       return;
     }
 
-    // Eliminar el bien del arreglo
+   
     clientes.splice(indice, 1);
 
-    // borralo de la clase inventario
+   
     inventario.eliminarCliente(respuestas.id.trim());
 
-    // Guardar los cambios en el archivo JSON
+    
     await fs.writeFile("./db/Cliente.json", JSON.stringify(clientes, null, 2), "utf-8");
     console.log("Cliente eliminado con éxito.");
 
-    // Crear un nuevo bien con los datos proporcionados
     const nuevoCliente = new Cliente(
       respuestas.id,
       respuestas.nombre,
@@ -400,9 +398,10 @@ export async function modificarCliente() {
 
 /**
  * Función para buscar un elemento según un tipo y un valor, solicitan do al usuario el valor a buscar.
+ * @param tipo - Tipo de elemento a buscar.
+ * @param valor - Valor a buscar.
  */
 export async function buscar(tipo: string, valor: string) {
-  // Preguntar al usuario el valor a buscar según el tipo
   const respuestas = await inquirer.prompt([
     {
       type: "input",
@@ -411,13 +410,11 @@ export async function buscar(tipo: string, valor: string) {
     }
   ]);
 
-  
   const buscar = respuestas.buscar.trim();  
     console.log("Buscando en el tipo: ", tipo);
   try {
-    // cargar todo desde el archivo JSON
     await cargarTodoDesdeJSON();
-    // Guardar en una variable lo que devuelve el inventario al buscar
+
     console.log("Valores", tipo, valor, buscar)
     const resultado = inventario.buscar(tipo, valor, buscar);
 
@@ -440,7 +437,7 @@ export async function cargarBienesDesdeJSON() {
     const data = await fs.readFile("./db/Bien.json", "utf-8");
     const bienes = JSON.parse(data);
 
-    // Agregar los bienes al inventario
+  
     bienes.forEach((bien: any) => {
       inventario.agregarBien(
         new Bien(
@@ -458,16 +455,15 @@ export async function cargarBienesDesdeJSON() {
   }
 }
 
-// fucnion para cargar los clientes desde un archivo JSON, y los agrege como clases al inventario
+
 export async function cargarClientesDesdeJSON() {
   try {
     const data = await fs.readFile("./db/Cliente.json", "utf-8");
     const clientes = JSON.parse(data);
 
-    // Limpiar los clientes existentes en el inventario antes de cargar nuevos
     inventario.limpiarClientes();
 
-    // Agregar los clientes al inventario
+    
     clientes.forEach((cliente: any) => {
       inventario.agregarCliente(
         new Cliente(cliente._idUnico, cliente._nombre, cliente._raza, cliente._ubicacion)
@@ -486,10 +482,10 @@ export async function cargarMercaderesDesdeJSON() {
     const data = await fs.readFile("./db/Mercader.json", "utf-8");
     const mercaderes = JSON.parse(data);
 
-    // Limpiar los mercaderes existentes en el inventario antes de cargar nuevos
+   
     inventario.limpiarMercaderes();
 
-    // Agregar los mercaderes al inventario
+    
     mercaderes.forEach((mercader: any) => {
       inventario.agregarMercader(
         new Mercader(mercader._id, mercader._nombre, mercader._tipo, mercader._ubicacion)
@@ -500,11 +496,11 @@ export async function cargarMercaderesDesdeJSON() {
   }
 }
 
-
-// fucnion para cargar todo desde un archivo JSON, y los agrege como clases al inventario, y debe llamar a las funciones de cargarBienesDesdeJSON, cargarClientesDesdeJSON y cargarMercaderesDesdeJSON
+/**
+ * Función para cargar todos los datos desde los archivos JSON.
+ */
 export async function cargarTodoDesdeJSON() {
   try {
-    // elimina todo de inventario
     inventario.limpiarBienes();
     inventario.limpiarClientes();
     inventario.limpiarMercaderes();
@@ -517,14 +513,14 @@ export async function cargarTodoDesdeJSON() {
 }
 
 
-// funcion para ordenar los bienes por nombre
+/**
+ * Funcion para ordenar los bienes por nombre
+ * @param opt - Opción para ordenar de forma ascendente o descendente.
+ */
 export async function ordenarBienesPorNombre(opt: boolean) {
-  // cargar todo desde el archivo JSON
   await cargarTodoDesdeJSON();
-  // preguntar si se quiere ordenar de forma ascendente o descendente
   if (opt) {
     let bienes = inventario.ordenarBienesPorNombre(true);
-    // muestra el vector de bienes ordenado
     console.log(bienes);
   } else {
     let bienes = inventario.ordenarBienesPorNombre(false);
@@ -532,14 +528,14 @@ export async function ordenarBienesPorNombre(opt: boolean) {
   }
 }
 
-// funcion para ordenar los bienes por nombre
+/**
+ * Funcion para ordenar los bienes por valor
+ * @param opt - Opción para ordenar de forma ascendente o descendente.
+ */
 export async function ordenarBienesPorValor(opt: boolean) {
-  // cargar todo desde el archivo JSON
   await cargarTodoDesdeJSON();
-  // preguntar si se quiere ordenar de forma ascendente o descendente
   if (opt) {
     let bienes = inventario.ordenarBienesPorValor(true);
-    // muestra el vector de bienes ordenado
     console.log(bienes);
   } else {
     let bienes = inventario.ordenarBienesPorValor(false);
@@ -548,59 +544,15 @@ export async function ordenarBienesPorValor(opt: boolean) {
 }
 
 
-export async function bienesMasVendidos() {
-  const bienesVendidos = inventario.gestorTransaccioness.obtenerBienesMasVendidos();
-  console.log("Bienes más vendidos:");
-  bienesVendidos.forEach((bien, index) => {
-    console.log(`${index + 1}. ${bien.nombre}: ${bien.cantidad} ventas`);
-  });
-}
-
-export async function totalIngresosGastos() {
-  const ingresos = inventario.gestorTransaccioness.obtenerTotalIngresos();
-  const gastos = inventario.gestorTransaccioness.obtenerTotalGastos();
-  console.log(`Total de ingresos por ventas: ${ingresos} coronas`);
-  console.log(`Total de gastos por compras: ${gastos} coronas`);
-  console.log(`Balance total: ${ingresos - gastos} coronas`);
-}
-
-export async function historialTransacciones() {
-  const respuesta = await inquirer.prompt([
-    {
-      type: "list",
-      name: "tipo",
-      message: "¿De quién deseas obtener el historial?",
-      choices: [
-        "Cliente",
-        "Mercader",
-        "Volver al menú de informes"
-      ]
-    }
-  ]);
-
-  if (respuesta.tipo === "Cliente" || respuesta.tipo === "Mercader") {
-    const respuestas = await inquirer.prompt([
-      { type: "input", name: "id", message: `ID del ${respuesta.tipo.toLowerCase()}:` }
-    ]);
-    const historial = inventario.gestorTransaccioness.obtenerHistorialPorActor(respuestas.id, respuesta.tipo.toLowerCase());
-    console.log(`Historial de transacciones:`);
-    historial.forEach((transaccion, index) => {
-      console.log(`${index + 1}. Tipo: ${transaccion.tipo}, Fecha: ${transaccion.fecha}, Bienes: ${transaccion.bienes.join(", ")}, Coronas: ${transaccion.cantidadCoronas}`);
-    });
-  }
-}
-
-
-// funcion para mostrar el stok de un bien en concreto
+/**
+ * Función para mostrar el stock de un bien en concreto. 
+ */
 export async function stockDeUnBien() {
-  // pide al usuario el nombre del bien, como lo hacen las otras funciones
   const respuestas = await inquirer.prompt([
     { type: "input", name: "nombre", message: "Nombre del bien a buscar:" }
   ]);
   try {
-    // cargar todo desde el archivo JSON
     await cargarTodoDesdeJSON();
-    // Guardar en una variable lo que devuelve el inventario al buscar
     const resultado = inventario.obtenerStockPorNombre(respuestas.nombre);
     if (resultado) {
       console.log(`Stock del bien "${respuestas.nombre}":`);
@@ -611,5 +563,137 @@ export async function stockDeUnBien() {
   }
   catch (error) {
     console.error("Error al buscar el bien:", error.message);
+  }
+}
+
+/**
+ * Función para realizar una compra.
+ * @param compradorId - ID del comprador (mercader).
+ */
+export async function realizarCompra() {
+  try {
+    console.log("Realizar compra");
+    await cargarTodoDesdeJSON();
+    const respuestas = await inquirer.prompt([
+      { type: "input", name: "id", message: "ID del mercader:" }
+    ]); 
+    const mercader = inventario.buscarMercaderPorId(respuestas.id);
+    if (!mercader) {
+      console.log("Mercader no encontrado.");
+      return;
+    }    
+    const respuestas2 = await inquirer.prompt([
+      { type: "number", name: "cantidadCoronas", message: "Cantidad de coronas a pagar:" }
+    ]);
+    console.log("introduce el bien que quieres comprar");
+  
+    
+    
+  const respuestas3 = await inquirer.prompt([
+    { type: "input", name: "id", message: "ID del bien:" },
+    { type: "input", name: "nombre", message: "Nombre del bien:" },
+    { type: "input", name: "descripcion", message: "Descripción del bien:" },
+    { type: "input", name: "material", message: "Material del bien:" },
+    { type: "number", name: "peso", message: "Peso del bien:" },
+    { type: "number", name: "valor", message: "Valor del bien en coronas:" }
+  ]);
+
+  try {
+    await cargarTodoDesdeJSON();
+
+    const existe = inventario.buscarBienPorId(respuestas3.id);
+    if (existe) {
+      console.log("Ya existe un bien con el mismo ID. No se puede agregar.");
+      return;
+    }
+  
+    const nuevoBien = new Bien(
+      respuestas3.id,
+      respuestas3.nombre,
+      respuestas3.descripcion,
+      respuestas3.material,
+      respuestas3.peso,
+      respuestas3.valor
+    );
+    nuevoBien.guardarDatos();
+    inventario.agregarBien(nuevoBien);
+    console.log("Bien comprado con éxito.");
+  } catch (error) {
+    console.error("Error al agregar el bien:", error.message);
+  }
+    
+    const bien = inventario.getUltimoBien();
+
+    console.log("introduce cantidad de coronas a pagar");
+   
+    const respuestas4 = await inquirer.prompt([
+      { type: "number", name: "cantidadCoronas", message: "Cantidad de coronas a pagar:" }
+    ]);
+
+    
+    if (bien.valorCoronas < respuestas4.cantidadCoronas) {
+      console.log("Oooh el mercader no tiene suficiente dinero");
+      return;
+    }
+
+
+   
+    console.log(`Has comprado el bien ${bien.nombre} al mercader ${mercader.nombre}`);
+
+    
+    inventario.comprar(respuestas.id, respuestas2.cantidadCoronas);
+
+  } catch (error) {
+    console.error("Error al realizar la compra:", error.message);
+  }
+}
+/**
+ * Función para realizar una venta.
+ */
+export async function realizarVenta() {
+  try {
+    console.log("Realizar venta");
+
+    await cargarTodoDesdeJSON();
+
+    const { id: clienteId } = await inquirer.prompt([
+      { type: "input", name: "id", message: "ID del cliente:" },
+    ]);
+
+    const cliente = inventario.buscarClientePorId(clienteId);
+    if (!cliente) {
+      console.log("Cliente no encontrado.");
+      return;
+    }
+
+    const { idBien } = await inquirer.prompt([
+      { type: "input", name: "idBien", message: "ID del bien que deseas vender:" },
+    ]);
+
+    const bien = inventario.buscarBienPorId(idBien);
+    if (!bien) {
+      console.log("Bien no encontrado.");
+      return;
+    }
+
+    inventario.vender(clienteId, idBien);
+
+    const data = await fs.readFile("./db/Bien.json", "utf-8");
+    const bienes: any[] = JSON.parse(data);
+
+    const indice = bienes.findIndex(b => b._idUnico === idBien.trim());
+    if (indice === -1) {
+      console.log("No se encontró el bien con el ID proporcionado en la base de datos.");
+      return;
+    }
+
+    // Eliminar el bien del array y actualizar el archivo JSON
+    bienes.splice(indice, 1);
+    await fs.writeFile("./db/Bien.json", JSON.stringify(bienes, null, 2), "utf-8");
+
+    // Confirmar la venta
+    console.log(`Bien con ID "${idBien}" vendido con éxito al cliente con ID "${clienteId}".`);
+  } catch (error) {
+    console.error("Error al realizar la venta:", error.message);
   }
 }

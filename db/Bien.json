@@ -1,13 +1,5 @@
 [
   {
-    "_idUnico": "23",
-    "_nombre": "a",
-    "_descripcion": "3",
-    "_material": "3",
-    "_peso": 3,
-    "_valorCoronas": 3
-  },
-  {
     "_idUnico": "3",
     "_nombre": "a",
     "_descripcion": "2",
@@ -32,11 +24,27 @@
     "_valorCoronas": 2
   },
   {
-    "_idUnico": "5",
+    "_idUnico": "888",
     "_nombre": "h",
     "_descripcion": "5",
     "_material": "5",
     "_peso": 5,
     "_valorCoronas": 5
+  },
+  {
+    "_idUnico": "66666",
+    "_nombre": "2sfg",
+    "_descripcion": "dfg",
+    "_material": "sdfgdfhwdh",
+    "_peso": 2,
+    "_valorCoronas": 2
+  },
+  {
+    "_idUnico": "23423462",
+    "_nombre": "sdfgd",
+    "_descripcion": "fdsdfgdfg",
+    "_material": "sdfgsfdg",
+    "_peso": 2,
+    "_valorCoronas": 2
   }
 ]
